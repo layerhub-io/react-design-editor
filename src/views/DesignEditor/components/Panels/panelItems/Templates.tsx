@@ -8,11 +8,12 @@ import { useStyletron } from "baseui"
 import { SAMPLE_TEMPLATES } from "~/constants/editor"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 import useDesignEditorContext from "~/hooks/useDesignEditorContext"
+import useEditorType from "~/hooks/useEditorType"
 
 export default function () {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
-
+  const editorType = useEditorType()
   const { setCurrentScene, currentScene } = useDesignEditorContext()
 
   const loadTemplate = React.useCallback(
@@ -32,7 +33,11 @@ export default function () {
         if (filteredFonts.length > 0) {
           await loadFonts(filteredFonts)
         }
-        setCurrentScene({ ...template, id: currentScene?.id })
+        if (editorType === "GRAPHIC") {
+          editor.design.importFromJSON(template)
+        } else {
+          setCurrentScene({ ...template, id: currentScene?.id })
+        }
       }
     },
     [editor, currentScene]
