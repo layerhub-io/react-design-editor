@@ -18,39 +18,10 @@ const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
   height: "64px",
   background: $theme.colors.black,
   display: "flex",
-  padding: "0 1rem",
+  padding: "0 1.25rem",
   justifyContent: "space-between",
   alignItems: "center",
 }))
-
-interface GraphicEditor {
-  name: string
-  frame: string
-}
-
-interface PresentatinoEditor {
-  name: string
-  frame: string
-  scenes: [
-    {
-      duration: number
-      layers: []
-    }
-  ]
-}
-
-interface Scene {
-  duration: number
-  layers: []
-}
-
-interface VideoEditor {
-  id: string
-  name: string
-  frame: string
-  duration: string
-  scenes: Scene
-}
 
 export default function () {
   const { setDisplayPreview, setScenes } = useDesignEditorContext()
@@ -61,7 +32,16 @@ export default function () {
 
   const parseGraphicJSON = () => {
     const design = editor.design.exportToJSON()
-    makeDownload(design)
+    const graphicTemplate = {
+      id: design.id,
+      type: "GRAPHIC",
+      name: design.name,
+      content: design.layers,
+      frame: design.frame,
+      metadata: {},
+    }
+
+    makeDownload(graphicTemplate)
   }
 
   const parsePresentationJSON = () => {
@@ -80,12 +60,14 @@ export default function () {
       }
     })
 
-    const template = {
+    const presentationTemplate = {
+      id: currentDesign.id,
+      type: "PRESENTATION",
       name: currentDesign.name,
       frame: currentDesign.frame,
-      scenes: updatedScenes,
+      content: updatedScenes,
     }
-    makeDownload(template)
+    makeDownload(presentationTemplate)
   }
 
   const parseVideoJSON = () => {
@@ -104,12 +86,14 @@ export default function () {
       }
     })
 
-    const template = {
+    const videoTemplate = {
+      id: currentDesign.id,
+      type: "VIDEO",
       name: currentDesign.name,
       frame: currentDesign.frame,
-      scenes: updatedScenes,
+      content: updatedScenes,
     }
-    makeDownload(template)
+    makeDownload(videoTemplate)
   }
 
   const makeDownload = (data: Object) => {
@@ -132,24 +116,84 @@ export default function () {
     }
   }
 
+  const loadGraphicTemplate = async (payload: any) => {
+    const design = {
+      id: payload.id,
+      name: payload.name,
+      frame: payload.frame,
+      layers: payload.content,
+    }
+    return design
+  }
+
+  const loadPresentationTemplate = async (payload: any) => {
+    const scenes = []
+    for (const scene of payload.content) {
+      const design: IDesign = {
+        name: "Awesome template",
+        frame: payload.frame,
+        id: nanoid(),
+        layers: scene.layers,
+        metadata: {},
+      }
+      const loadedDesign = await loadVideoEditorAssets(design)
+
+      const preview = (await editor.renderer.render(loadedDesign)) as string
+      await loadTemplateFonts(loadedDesign)
+      scenes.push({ ...loadedDesign, preview })
+    }
+    return scenes
+  }
+
+  const loadVideoTemplate = async (payload: any) => {
+    const scenes = []
+
+    for (const scene of payload.content) {
+      const design: IDesign = {
+        name: "Awesome template",
+        frame: payload.frame,
+        id: nanoid(),
+        layers: scene.layers,
+        metadata: {},
+      }
+      const loadedDesign = await loadVideoEditorAssets(design)
+
+      const preview = (await editor.renderer.render(loadedDesign)) as string
+      await loadTemplateFonts(loadedDesign)
+      scenes.push({ ...loadedDesign, preview })
+    }
+    return scenes
+  }
+
   const handleImportTemplate = React.useCallback(
     async (data: any) => {
-      const scenes = []
-      for (const scene of data.scenes) {
-        const design: IDesign = {
-          name: "Awesome template",
-          frame: data.frame,
-          id: nanoid(),
-          layers: scene.layers,
-          metadata: {},
-        }
-        const loadedDesign = await loadVideoEditorAssets(design)
-
-        const preview = (await editor.renderer.render(loadedDesign)) as string
-        await loadTemplateFonts(loadedDesign)
-        scenes.push({ ...loadedDesign, preview })
+      if (data.type === "GRAPHIC") {
+        const template = await loadGraphicTemplate(data)
+        console.log({ template })
+      } else if (data.type === "PRESENTATION") {
+        const template = await loadPresentationTemplate(data)
+        console.log({ template })
+      } else if (data.type === "VIDEO") {
+        const template = await loadVideoTemplate(data)
+        console.log({ template })
       }
-      setScenes(scenes)
+
+      // const scenes = []
+      // for (const scene of data.content) {
+      //   const design: IDesign = {
+      //     name: "Awesome template",
+      //     frame: data.frame,
+      //     id: nanoid(),
+      //     layers: scene.layers,
+      //     metadata: {},
+      //   }
+      //   const loadedDesign = await loadVideoEditorAssets(design)
+
+      //   const preview = (await editor.renderer.render(loadedDesign)) as string
+      //   await loadTemplateFonts(loadedDesign)
+      //   scenes.push({ ...loadedDesign, preview })
+      // }
+      // setScenes(scenes)
     },
     [editor]
   )

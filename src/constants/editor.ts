@@ -1,3 +1,5 @@
+import { ILayer } from "@scenify/types"
+
 export const SecondLevelMenus = ["FontFamily"]
 export const FirstLevelMenus = ["Background"]
 
@@ -3615,3 +3617,39 @@ export const sampleFrames = [
     preview: "https://ik.imagekit.io/scenify/social-twittter-post.svg",
   },
 ]
+
+const layers: ILayer[] = []
+
+const graphicTemplate = {
+  id: "",
+  name: "",
+  type: "GRAPHIC",
+  frame: {},
+  content: [...layers],
+}
+
+const presentationTemplate = {
+  id: "",
+  name: "",
+  type: "PRESENTATION",
+  frame: {},
+  content: [
+    {
+      duration: 1000,
+      layers: [],
+    },
+  ],
+}
+
+const VideoTemplate = {
+  id: "",
+  name: "",
+  type: "VIDEO",
+  frame: {},
+  content: [
+    {
+      duration: 1000,
+      layers: [],
+    },
+  ],
+}
