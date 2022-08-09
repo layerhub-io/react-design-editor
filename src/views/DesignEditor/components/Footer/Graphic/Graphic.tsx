@@ -1,6 +1,8 @@
+import React from "react"
 import { styled } from "baseui"
 import { Theme } from "baseui/theme"
-import Controls from "./Controls"
+import Common from "./Common"
+import Scenes from "./Scenes"
 
 const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
   background: $theme.colors.white,
@@ -9,7 +11,8 @@ const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
 export default function () {
   return (
     <Container>
-      <Controls />
+      <Scenes />
+      <Common />
     </Container>
   )
 }

@@ -21,16 +21,12 @@ export default function () {
   const [options, setOptions] = React.useState<Options>({
     zoomRatio: 20,
   })
-  const editor = useEditor()
   const zoomRatio: number = useZoomRatio()
 
   React.useEffect(() => {
     setOptions({ ...options, zoomRatio: Math.round(zoomRatio * 100) })
   }, [zoomRatio])
 
-  const handleChange = (type: string, value: any) => {
-    editor.zoom.zoomToRatio(value / 100)
-  }
   return (
     <Container>
       <div>

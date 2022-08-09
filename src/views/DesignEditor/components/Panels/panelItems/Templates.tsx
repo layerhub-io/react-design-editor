@@ -14,7 +14,6 @@ import { loadVideoEditorAssets } from "~/utils/video"
 export default function () {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
-  const editorType = useEditorType()
   const { setCurrentScene, currentScene } = useDesignEditorContext()
 
   const loadTemplate = React.useCallback(
@@ -35,11 +34,7 @@ export default function () {
           await loadFonts(filteredFonts)
         }
 
-        if (editorType === "GRAPHIC") {
-          editor.design.importFromJSON(template)
-        } else {
-          setCurrentScene({ ...template, id: currentScene?.id })
-        }
+        setCurrentScene({ ...template, id: currentScene?.id })
       }
     },
     [editor, currentScene]
