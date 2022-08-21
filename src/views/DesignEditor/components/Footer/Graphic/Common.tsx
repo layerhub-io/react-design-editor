@@ -11,6 +11,8 @@ interface Options {
 }
 
 export default function () {
+  const zoomMin = 10;
+  const zoomMax = 240;
   const editor = useEditor()
   const [options, setOptions] = React.useState<Options>({
     zoomRatio: 20,
@@ -19,10 +21,10 @@ export default function () {
 
   const handleChange = (type: string, value: any) => {
     if (value < 0) {
-      editor.zoom.zoomToRatio(1 / 100)
+      editor.zoom.zoomToRatio(zoomMin / 100)
     }
-    else if (value > 240) {
-      editor.zoom.zoomToRatio(240 / 100)
+    else if (value > zoomMax) {
+      editor.zoom.zoomToRatio(zoomMax / 100)
     }
     else {
       editor.zoom.zoomToRatio(value / 100)
@@ -83,14 +85,15 @@ export default function () {
           }}
           value={[options.zoomRatio]}
           onChange={({ value }) => { handleChange("zoomRatio", value[0]) }}
-          min={10}
-          max={240}
+          min={zoomMin}
+          max={zoomMax}
         />
         <Button kind={KIND.tertiary} size={SIZE.compact}
           onClick={() => handleChange("zoomRatio", options.zoomRatio + 20)}>
           <Icons.AddCircleOutline size={24} />
         </Button>
         <Input
+          type="number"
           value={options.zoomRatio}
           endEnhancer="%"
           overrides={{
@@ -101,6 +104,9 @@ export default function () {
             },
           }}
           size={SIZE.mini}
+          max={zoomMax}
+          min={zoomMin}
+          onChange={(e: any)=> handleChange("zoomRatio", e.target.value)}
         />
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
