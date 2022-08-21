@@ -3,6 +3,8 @@ import { styled } from "baseui"
 import { Theme } from "baseui/theme"
 import Icons from "~/components/Icons"
 import { Button, KIND, SIZE } from "baseui/button"
+import { Slider } from "baseui/slider"
+import { Input } from "baseui/input"
 import { useEditor, useZoomRatio } from "@layerhub-io/react"
 
 const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
@@ -18,6 +20,8 @@ interface Options {
 }
 
 export default function () {
+  const zoomMin = 10
+  const zoomMax = 240
   const [options, setOptions] = React.useState<Options>({
     zoomRatio: 20,
   })
@@ -29,14 +33,82 @@ export default function () {
   }, [zoomRatio])
 
   const handleChange = (type: string, value: any) => {
-    editor.zoom.zoomToRatio(value / 100)
+    if (value < 0) {
+      editor.zoom.zoomToRatio(zoomMin / 100)
+    }
+    else if (value > zoomMax) {
+      editor.zoom.zoomToRatio(zoomMax / 100)
+    }
+    else {
+      editor.zoom.zoomToRatio(value / 100)
+    }
   }
+  
   return (
     <Container>
       <div>
         <Button kind={KIND.tertiary} size={SIZE.compact}>
           <Icons.Layers size={20} />
         </Button>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Button kind={KIND.tertiary} size={SIZE.compact}>
+          <Icons.Expand size={16} />
+        </Button>
+        <Button kind={KIND.tertiary} size={SIZE.compact}>
+          <Icons.Compress size={16} />
+        </Button>
+        <Button kind={KIND.tertiary} size={SIZE.compact}
+          onClick={() => handleChange("zoomRatio", options.zoomRatio - 20)}>
+          <Icons.RemoveCircleOutline size={24} />
+        </Button>
+        <Slider
+          overrides={{
+            InnerThumb: () => null,
+            ThumbValue: () => null,
+            TickBar: () => null,
+            Root: {
+              style: { width: "140px" },
+            },
+            Thumb: {
+              style: {
+                height: "12px",
+                width: "12px",
+                paddingLeft: 0,
+              },
+            },
+            Track: {
+              style: {
+                paddingLeft: 0,
+                paddingRight: 0,
+              },
+            },
+          }}
+          value={[options.zoomRatio]}
+          onChange={({ value }) => { handleChange("zoomRatio", value[0]) }}
+          min={zoomMin}
+          max={zoomMax}
+        />
+        <Button kind={KIND.tertiary} size={SIZE.compact}
+          onClick={() => handleChange("zoomRatio", options.zoomRatio + 20)}>
+          <Icons.AddCircleOutline size={24} />
+        </Button>
+        <Input
+          type="number"
+          value={options.zoomRatio}
+          endEnhancer="%"
+          overrides={{
+            Root: {
+              style: {
+                width: "96px",
+              },
+            },
+          }}
+          size={SIZE.mini}
+          max={zoomMax}
+          min={zoomMin}
+          onChange={(e: any)=> handleChange("zoomRatio", e.target.value)}
+        />
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
         <Button kind={KIND.tertiary} size={SIZE.compact}>

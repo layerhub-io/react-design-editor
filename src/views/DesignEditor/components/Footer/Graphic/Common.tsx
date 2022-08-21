@@ -11,8 +11,8 @@ interface Options {
 }
 
 export default function () {
-  const zoomMin = 10;
-  const zoomMax = 240;
+  const zoomMin = 10
+  const zoomMax = 240
   const editor = useEditor()
   const [options, setOptions] = React.useState<Options>({
     zoomRatio: 20,
