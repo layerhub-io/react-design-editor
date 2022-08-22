@@ -13,13 +13,14 @@ import { nanoid } from "nanoid"
 import { IDesign } from "@layerhub-io/types"
 import { loadTemplateFonts } from "~/utils/fonts"
 import { loadVideoEditorAssets } from "~/utils/video"
+import DesignTitle from "./DesignTitle"
 
 const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
   height: "64px",
   background: $theme.colors.black,
-  display: "flex",
+  display: "grid",
   padding: "0 1.25rem",
-  justifyContent: "space-between",
+  gridTemplateColumns: "240px 1fr 240px",
   alignItems: "center",
 }))
 
@@ -225,7 +226,8 @@ export default function () {
         <div style={{ color: "#ffffff" }}>
           <Logo size={36} />
         </div>
-        <Block $style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <DesignTitle />
+        <Block $style={{ display: "flex", alignItems: "center", gap: "0.5rem", justifyContent: "flex-end" }}>
           <input
             multiple={false}
             onChange={handleFileInput}
