@@ -9,6 +9,8 @@ import { useEditor } from "@layerhub-io/react"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
 export default function () {
+  const inputFileRef = React.useRef<HTMLInputElement>(null)
+
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
 
@@ -24,6 +26,23 @@ export default function () {
     },
     [editor]
   )
+
+  const handleDropFiles = (files: FileList) => {
+    const file = files[0]
+    const url = URL.createObjectURL(file)
+    editor.objects.add({
+      src: url,
+      type: "StaticVector",
+    })
+  }
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleDropFiles(e.target.files!)
+  }
+
+  const handleInputFileRefClick = () => {
+    inputFileRef.current?.click()
+  }
 
   return (
     <Block $style={{ flex: 1, display: "flex", flexDirection: "column" }}>
@@ -42,21 +61,24 @@ export default function () {
           <AngleDoubleLeft size={18} />
         </Block>
       </Block>
-      <Scrollable>
-        {/* <Block padding={"0 1.5rem"}>
-          <Button
-            size={SIZE.compact}
-            overrides={{
-              Root: {
-                style: {
-                  width: "100%",
-                },
+
+      <Block padding={"0 1.5rem"}>
+        <Button
+          onClick={handleInputFileRefClick}
+          size={SIZE.compact}
+          overrides={{
+            Root: {
+              style: {
+                width: "100%",
               },
-            }}
-          >
-            Computer
-          </Button>
-        </Block> */}
+            },
+          }}
+        >
+          Computer
+        </Button>
+      </Block>
+      <Scrollable>
+        <input onChange={handleFileInput} type="file" id="file" ref={inputFileRef} style={{ display: "none" }} />
         <Block>
           <Block $style={{ display: "grid", gap: "8px", padding: "1.5rem", gridTemplateColumns: "1fr 1fr" }}>
             {vectors.map((vector, index) => (
