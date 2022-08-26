@@ -54,11 +54,12 @@ export default function () {
         <Button kind={KIND.tertiary} size={SIZE.compact}>
           <Icons.Expand size={16} />
         </Button>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+        <Button kind={KIND.tertiary} size={SIZE.compact}
+          onClick={() => editor.zoom.zoomToFit()}>
           <Icons.Compress size={16} />
         </Button>
         <Button kind={KIND.tertiary} size={SIZE.compact}
-          onClick={() => handleChange("zoomRatio", options.zoomRatio - 20)}>
+          onClick={() => editor.zoom.zoomOut()}>
           <Icons.RemoveCircleOutline size={24} />
         </Button>
         <Slider
@@ -89,7 +90,7 @@ export default function () {
           max={zoomMax}
         />
         <Button kind={KIND.tertiary} size={SIZE.compact}
-          onClick={() => handleChange("zoomRatio", options.zoomRatio + 20)}>
+          onClick={() => editor.zoom.zoomIn()}>
           <Icons.AddCircleOutline size={24} />
         </Button>
         <Input
