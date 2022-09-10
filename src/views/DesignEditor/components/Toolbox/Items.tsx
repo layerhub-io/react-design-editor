@@ -4,6 +4,7 @@ import Image from "./Image"
 import Vector from "./Vector"
 import Locked from "./Locked"
 import Multiple from "./Multiple"
+import Canvas from "./Canvas"
 
 export default {
   StaticText: Text,
@@ -12,4 +13,5 @@ export default {
   StaticVector: Vector,
   Locked,
   Multiple,
+  Canvas,
 }

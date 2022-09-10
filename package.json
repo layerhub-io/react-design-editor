@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@layerhub-io/react": "^0.2.1",
+    "@layerhub-io/react": "^0.2.2",
     "@layerhub-io/react-custom-scrollbar": "^0.0.1",
     "@layerhub-io/use-timer": "^0.1.1",
     "@reduxjs/toolkit": "^1.8.1",

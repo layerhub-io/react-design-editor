@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@layerhub-io/react': ^0.2.1
+  '@layerhub-io/react': ^0.2.2
   '@layerhub-io/react-custom-scrollbar': ^0.0.1
   '@layerhub-io/types': ^0.2.0
   '@layerhub-io/use-timer': ^0.1.1
@@ -38,7 +38,7 @@ specifiers:
   vite-tsconfig-paths: ^3.5.0
 
 dependencies:
-  '@layerhub-io/react': 0.2.1
+  '@layerhub-io/react': 0.2.2
   '@layerhub-io/react-custom-scrollbar': 0.0.1_react@18.2.0
   '@layerhub-io/use-timer': 0.1.1_react@18.2.0
   '@reduxjs/toolkit': 1.8.2_kkwg4cbsojnjnupd3btipussee
@@ -404,8 +404,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@layerhub-io/core/0.2.1:
-    resolution: {integrity: sha512-ynqOaQtih4lXDUxvejQrmnyj9pjn4vSmz/OGmDgpyag0gSScTW4UQUBEWY8VCGlxgATx0bXGD0RGS0A+FrS/ow==}
+  /@layerhub-io/core/0.2.2:
+    resolution: {integrity: sha512-vTWOgaqTgnYBX4KDuZ5sNUM5+QiwZvby3LirrQgGiQOwxJoOCamYmaFShG6afIdDc0EOhpFbE37pfc715jOUyw==}
     dependencies:
       '@layerhub-io/objects': 0.1.1_fabric@5.2.1
       '@layerhub-io/types': 0.2.0
@@ -440,10 +440,10 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@layerhub-io/react/0.2.1:
-    resolution: {integrity: sha512-/hYn2/A6c1fYgM7Jadp+MBXEvFIFFo6MF9NbclJWkOnwB7+M5JDIObIdHEfx6vStJ+Y/ozowFLR4vdKHy4BVCg==}
+  /@layerhub-io/react/0.2.2:
+    resolution: {integrity: sha512-AX1m+cKnSRSQ8+KAjhZ+YVg1Qh70Ae6zULtYcPlzU3/d1Nm1xfggpleZo7wVsNt99no6kXycyXWUKhaBZK71Hw==}
     dependencies:
-      '@layerhub-io/core': 0.2.1
+      '@layerhub-io/core': 0.2.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       resize-observer-polyfill: 1.5.1

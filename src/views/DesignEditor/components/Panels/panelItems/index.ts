@@ -12,6 +12,7 @@ import Elements from "./Elements"
 import Graphics from "./Graphics"
 import TextFill from "./TextFill"
 import PathFill from "./PathFill"
+import CanvasFill from "./CanvasFill"
 
 export default {
   StaticText: TextProperties,
@@ -28,4 +29,5 @@ export default {
   Layers: Layers,
   TextFill: TextFill,
   PathFill: PathFill,
+  CanvasFill: CanvasFill,
 }

@@ -6,7 +6,8 @@ import Items from "./Items"
 import useAppContext from "~/hooks/useAppContext"
 import { ILayer } from "@layerhub-io/types"
 
-const DEFAULT_TOOLBOX = "NONE"
+const DEFAULT_TOOLBOX = "Canvas"
+
 interface ToolboxState {
   toolbox: string
 }
@@ -62,7 +63,8 @@ const Toolbox = () => {
 
   // @ts-ignore
   const Component = Items[state.toolbox]
-  return <Container>{Component && <Component />}</Container>
+
+  return <Container>{Component ? <Component /> : state.toolbox}</Container>
 }
 
 export default Toolbox
