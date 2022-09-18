@@ -85,7 +85,7 @@ export default function () {
           </Block>
         </Block>
         <Block $style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
-          <Button $style={{ width: "180px" }} onClick={() => setEditorType(selectedEditor)}>
+          <Button style={{ width: "180px" }} onClick={() => setEditorType(selectedEditor)}>
             Continue
           </Button>
         </Block>

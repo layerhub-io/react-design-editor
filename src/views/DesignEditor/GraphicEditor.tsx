@@ -4,6 +4,7 @@ import Canvas from "./components/Canvas"
 import Footer from "./components/Footer"
 import Toolbox from "./components/Toolbox"
 import EditorContainer from "./components/EditorContainer"
+import ContextMenu from "./components/ContextMenu"
 
 function GraphicEditor() {
   return (
@@ -12,7 +13,7 @@ function GraphicEditor() {
         <Navbar />
         <div style={{ display: "flex", flex: 1 }}>
           <Panels />
-          <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative" }}>
             <Toolbox />
             <Canvas />
             <Footer />
