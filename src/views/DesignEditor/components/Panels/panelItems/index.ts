@@ -13,7 +13,7 @@ import Graphics from "./Graphics"
 import TextFill from "./TextFill"
 import PathFill from "./PathFill"
 import CanvasFill from "./CanvasFill"
-
+import TextEffects from "./TextEffects"
 export default {
   StaticText: TextProperties,
   Text: Text,
@@ -30,4 +30,5 @@ export default {
   TextFill: TextFill,
   PathFill: PathFill,
   CanvasFill: CanvasFill,
+  TextEffects: TextEffects,
 }

@@ -249,7 +249,7 @@ export default function () {
 
           <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Bold">
             <Button
-              $style={{ ...(!state.bold && { color: "rgb(169,169,169)" }) }}
+              style={{ ...(!state.bold && { color: "rgb(169,169,169)" }) }}
               disabled={!state.styleOptions.hasBold}
               onClick={makeBold}
               size={SIZE.mini}
@@ -261,7 +261,7 @@ export default function () {
 
           <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Italic">
             <Button
-              $style={{ ...(!state.italic && { color: "rgb(169,169,169)" }) }}
+              style={{ ...(!state.italic && { color: "rgb(169,169,169)" }) }}
               disabled={!state.styleOptions.hasItalic}
               onClick={makeItalic}
               size={SIZE.mini}
@@ -278,7 +278,7 @@ export default function () {
             content="Underline"
           >
             <Button
-              $style={{ ...(!state.underline && { color: "rgb(169,169,169)" }) }}
+              style={{ ...(!state.underline && { color: "rgb(169,169,169)" }) }}
               onClick={makeUnderline}
               size={SIZE.mini}
               kind={KIND.tertiary}
@@ -297,7 +297,7 @@ export default function () {
 
           <TextSpacing />
           <Block width={"1px"} height={"24px"} backgroundColor="rgb(213,213,213)" margin={"0 4px"} />
-          <Button size={SIZE.compact} kind={KIND.tertiary}>
+          <Button onClick={() => setActiveSubMenu("TextEffects")} size={SIZE.compact} kind={KIND.tertiary}>
             Effects
           </Button>
           <Block width={"1px"} height={"24px"} backgroundColor="rgb(213,213,213)" margin={"0 4px"} />
