@@ -1,6 +1,6 @@
 import { IScene } from "@layerhub-io/types"
 import React from "react"
-import { ContextMenuTimelineRequest, DesignType, IDesign } from "~/interfaces/DesignEditor"
+import {ContextMenuSceneRequest, ContextMenuTimelineRequest, DesignType, IDesign} from "~/interfaces/DesignEditor"
 
 interface ISceneEditorContext {
   scenes: IScene[]
@@ -23,6 +23,8 @@ interface ISceneEditorContext {
   setMaxTime: React.Dispatch<React.SetStateAction<number>>
   contextMenuTimelineRequest: ContextMenuTimelineRequest
   setContextMenuTimelineRequest: React.Dispatch<React.SetStateAction<ContextMenuTimelineRequest>>
+  contextMenuSceneRequest: ContextMenuTimelineRequest
+  setContextMenuSceneRequest: React.Dispatch<React.SetStateAction<ContextMenuTimelineRequest>>
 }
 
 export const DesignEditorContext = React.createContext<ISceneEditorContext>({
@@ -62,6 +64,14 @@ export const DesignEditorContext = React.createContext<ISceneEditorContext>({
     visible: false,
   },
   setContextMenuTimelineRequest: () => {},
+  contextMenuSceneRequest: {
+    id: "",
+    left: 0,
+    top: 0,
+    visible: false,
+  },
+  setContextMenuSceneRequest: () => {},
+
 })
 
 export const DesignEditorProvider = ({ children }: { children: React.ReactNode }) => {
@@ -91,6 +101,12 @@ export const DesignEditorProvider = ({ children }: { children: React.ReactNode }
     top: 0,
     visible: false,
   })
+  const [contextMenuSceneRequest, setContextMenuSceneRequest] = React.useState<ContextMenuSceneRequest>({
+    id: "",
+    left: 0,
+    top: 0,
+    visible: false,
+  })
   const context = {
     scenes,
     setScenes,
@@ -112,6 +128,8 @@ export const DesignEditorProvider = ({ children }: { children: React.ReactNode }
     setMaxTime,
     contextMenuTimelineRequest,
     setContextMenuTimelineRequest,
+    contextMenuSceneRequest,
+    setContextMenuSceneRequest,
   }
   return <DesignEditorContext.Provider value={context}>{children}</DesignEditorContext.Provider>
 }
