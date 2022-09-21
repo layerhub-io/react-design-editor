@@ -24,6 +24,15 @@ export default function () {
   const contextMenuTimelineRequest = useContextMenuTimelineRequest()
   const editor = useEditor()
   const [css] = useStyletron()
+  
+  React.useEffect(() => {
+    if (editor && scenes && currentScene) {
+      const isCurrentSceneLoaded = scenes.find((s) => s.id === currentScene?.id)
+      if (!isCurrentSceneLoaded) {
+        setCurrentScene(scenes[0])
+      }
+    }
+  }, [editor, scenes, currentScene])
 
   React.useEffect(() => {
     if (editor && scenes && currentScene) {

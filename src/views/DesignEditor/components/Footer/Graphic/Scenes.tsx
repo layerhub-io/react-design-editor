@@ -62,21 +62,21 @@ export default function () {
         }
     }, [editor, scenes, currentScene])
 
-    React.useEffect(() => {
-        let watcher = async () => {
-            const updatedTemplate = editor.scene.exportToJSON()
-            const updatedPreview = (await editor.renderer.render(updatedTemplate)) as string
-            setCurrentPreview(updatedPreview)
-        }
-        if (editor) {
-            editor.on("history:changed", watcher)
-        }
-        return () => {
-            if (editor) {
-                editor.off("history:changed", watcher)
-            }
-        }
-    }, [editor])
+  React.useEffect(() => {
+    let watcher = async () => {
+      const updatedTemplate = editor.scene.exportToJSON()
+      const updatedPreview = (await editor.renderer.render(updatedTemplate)) as string
+      setCurrentPreview(updatedPreview)
+    }
+    if (editor) {
+      editor.on("history:changed", watcher)
+    }
+    return () => {
+      if (editor) {
+        editor.off("history:changed", watcher)
+      }
+    }
+  }, [editor])
 
     React.useEffect(() => {
         if (editor) {
