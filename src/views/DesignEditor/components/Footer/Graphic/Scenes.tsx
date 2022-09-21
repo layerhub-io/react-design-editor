@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useCallback, useState} from "react"
 import {useStyletron} from "baseui"
 import Add from "~/components/Icons/Add"
 import useDesignEditorPages from "~/hooks/useDesignEditorScenes"
@@ -12,6 +12,10 @@ import ScenesContextMenu from "./ScenesContextMenu";
 import useContextMenuSceneRequest from "~/hooks/useContextMenuSceneRequest";
 import useDesignEditorContext from "~/hooks/useDesignEditorContext";
 import ScenesItem from "./ScenesItem";
+import {DndProvider, useDrop} from "react-dnd";
+import {ItemTypes} from "~/views/DesignEditor/components/Footer/Video/itemType";
+import update from "immutability-helper";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 export default function () {
     const scenes = useDesignEditorPages()
@@ -22,6 +26,33 @@ export default function () {
     const [css] = useStyletron()
     const [currentPreview, setCurrentPreview] = React.useState("")
 
+    const findScene = useCallback(
+        (id: string) => {
+            const card = scenes.filter((c) => `${c.id}` === id)[0] as IScene
+            return {
+                card,
+                index: scenes.indexOf(card),
+            }
+        },
+        [scenes],
+    )
+
+    const moveScene = useCallback(
+        (id: string, atIndex: number) => {
+            const {card, index} = findScene(id)
+            setScenes(
+                update(scenes, {
+                    $splice: [
+                        [index, 1],
+                        [atIndex, 0, card],
+                    ],
+                }),
+            )
+        },
+        [findScene, scenes, setScenes],
+    )
+
+
     React.useEffect(() => {
         if (editor && scenes && currentScene) {
             const isCurrentSceneLoaded = scenes.find((s) => s.id === currentScene?.id)
@@ -31,21 +62,21 @@ export default function () {
         }
     }, [editor, scenes, currentScene])
 
-    React.useEffect(() => {
-        let watcher = async () => {
-            const updatedTemplate = editor.scene.exportToJSON()
-            const updatedPreview = (await editor.renderer.render(updatedTemplate)) as string
-            setCurrentPreview(updatedPreview)
-        }
-        if (editor) {
-            editor.on("history:changed", watcher)
-        }
-        return () => {
-            if (editor) {
-                editor.off("history:changed", watcher)
-            }
-        }
-    }, [editor])
+  React.useEffect(() => {
+    let watcher = async () => {
+      const updatedTemplate = editor.scene.exportToJSON()
+      const updatedPreview = (await editor.renderer.render(updatedTemplate)) as string
+      setCurrentPreview(updatedPreview)
+    }
+    if (editor) {
+      editor.on("history:changed", watcher)
+    }
+    return () => {
+      if (editor) {
+        editor.off("history:changed", watcher)
+      }
+    }
+  }, [editor])
 
     React.useEffect(() => {
         if (editor) {
@@ -138,37 +169,41 @@ export default function () {
             }}
         >
             {contextMenuSceneRequest.visible && <ScenesContextMenu/>}
-            <Block
-                $style={{display: "flex", alignItems: "center"}}>
-                {scenes.map((page, index) => (
-                    <ScenesItem key={index}
-                                index={index}
-                                page={page}
-                                changePage={changePage}
-                                currentPreview={currentPreview}/>
-                ))}
-                <div
-                    style={{
-                        background: "#ffffff",
-                        padding: "1rem 1rem 1rem 0.5rem",
-                    }}
-                >
+            <DndProvider backend={HTML5Backend}>
+                <Block
+                    $style={{display: "flex", alignItems: "center"}}>
+                    {scenes.map((page, index) => (
+                        <ScenesItem key={index}
+                                    index={index}
+                                    page={page}
+                                    moveScene={moveScene}
+                                    findScene={findScene}
+                                    changePage={changePage}
+                                    currentPreview={currentPreview}/>
+                    ))}
                     <div
-                        onClick={addScene}
-                        className={css({
-                            width: "100px",
-                            height: "56px",
-                            background: "rgb(243,244,246)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            cursor: "pointer",
-                        })}
+                        style={{
+                            background: "#ffffff",
+                            padding: "1rem 1rem 1rem 0.5rem",
+                        }}
                     >
-                        <Add size={20}/>
+                        <div
+                            onClick={addScene}
+                            className={css({
+                                width: "100px",
+                                height: "56px",
+                                background: "rgb(243,244,246)",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                cursor: "pointer",
+                            })}
+                        >
+                            <Add size={20}/>
+                        </div>
                     </div>
-                </div>
-            </Block>
+                </Block>
+            </DndProvider>
         </Block>
     )
 }

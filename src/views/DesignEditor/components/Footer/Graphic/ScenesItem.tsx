@@ -2,15 +2,58 @@ import React from "react"
 import {useStyletron} from "baseui";
 import {DesignEditorContext} from "~/contexts/DesignEditor";
 import useDesignEditorContext from "~/hooks/useDesignEditorContext";
+import {useDrag, useDrop} from "react-dnd";
+import {ItemTypes} from "./itemType";
 
+interface Item {
+    id: string
+    originalIndex: number
+}
 
-export default function ({page, index, changePage, currentPreview}: any) {
+export default function ({
+                             page,
+                             index,
+                             changePage,
+                             currentPreview,
+                             moveScene,
+                             findScene,
+                         }: any) {
     const sceneItemRef = React.useRef<HTMLDivElement>(null)
     const {currentScene} = React.useContext(DesignEditorContext)
     const [markerRefPosition, setMarkerRefPosition] = React.useState({y: 0})
     const [css] = useStyletron()
     const {setContextMenuSceneRequest} = useDesignEditorContext()
 
+    const originalIndex = findScene(page.id).index
+    const [{isDragging}, drag] = useDrag(
+        () => ({
+            type: ItemTypes.SCENE,
+            item: {id: page.id, originalIndex},
+            collect: (monitor) => ({
+                isDragging: monitor.isDragging(),
+            }),
+            end: (item, monitor) => {
+                const {id: droppedId, originalIndex} = item
+                const didDrop = monitor.didDrop()
+                if (!didDrop) {
+                    moveScene(droppedId, originalIndex)
+                }
+            },
+        }),
+        [page.id, originalIndex, moveScene],
+    )
+
+    const [, drop] = useDrop(
+        () => ({
+            accept: ItemTypes.SCENE,
+            hover({id: draggedId}: Item) {
+                if (draggedId !== page.id) {
+                    const {index: overIndex} = findScene(page.id)
+                    moveScene(draggedId, overIndex)
+                }
+            },
+        }),
+        [findScene, moveScene],)
 
     const onMouseMoveItem = (evt: any) => {
         if (sceneItemRef.current) {
@@ -53,6 +96,9 @@ export default function ({page, index, changePage, currentPreview}: any) {
         }}
     >
         <div
+            ref={(node: any) => {
+                drag(drop(node));
+            }}
             onClick={() => changePage(page)}
             className={css({
                 cursor: "pointer",
