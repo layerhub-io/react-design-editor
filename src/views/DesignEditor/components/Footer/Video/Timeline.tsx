@@ -14,6 +14,8 @@ import TimelineControl from "./TimelineControl"
 import TimelineContextMenu from "./TimelineContextMenu"
 import useContextMenuTimelineRequest from "~/hooks/useContextMenuTimelineRequest"
 import { findSceneIndexByTime } from "~/views/DesignEditor/utils/scenes"
+import {DndProvider} from "react-dnd";
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 export default function () {
   const { time, setTime, status } = useTimer()
@@ -22,6 +24,16 @@ export default function () {
   const contextMenuTimelineRequest = useContextMenuTimelineRequest()
   const editor = useEditor()
   const [css] = useStyletron()
+
+
+    React.useEffect(() => {
+        if (editor && scenes && currentScene) {
+            const isCurrentSceneLoaded = scenes.find((s) => s.id === currentScene?.id)
+            if (!isCurrentSceneLoaded) {
+                setCurrentScene(scenes[0])
+            }
+        }
+    }, [editor, scenes, currentScene])
 
   React.useEffect(() => {
     let watcher = async () => {
@@ -48,12 +60,7 @@ export default function () {
           width: 1200,
           height: 1200,
         })
-
-        editor.scene
-          .importFromJSON(defaultTemplate)
-          .then(() => {
-            // SET INITIAL DURATION
-            setCurrentDesign({
+          setCurrentDesign({
               id: nanoid(),
               frame: defaultTemplate.frame,
               metadata: {},
@@ -61,7 +68,11 @@ export default function () {
               preview: "",
               scenes: [],
               type: "VIDEO",
-            })
+          })
+
+        editor.scene
+          .importFromJSON(defaultTemplate)
+          .then(() => {
             const initialDesign = editor.scene.exportToJSON() as any
             editor.renderer.render(initialDesign).then((data) => {
               setCurrentScene({ ...initialDesign, preview: data, duration: 5000 })
@@ -71,7 +82,7 @@ export default function () {
           .catch(console.log)
       }
     }
-  }, [editor, currentScene])
+  }, [editor, currentScene,scenes])
 
   const updateCurrentScene = React.useCallback(
     async (design: IScene) => {
@@ -152,7 +163,9 @@ export default function () {
           >
             {contextMenuTimelineRequest.visible && <TimelineContextMenu />}
             <TimeMarker />
-            <TimelineItems />
+            <DndProvider backend={HTML5Backend}>
+                <TimelineItems />
+            </DndProvider>
           </Block>
           <Block
             onClick={addScene}
