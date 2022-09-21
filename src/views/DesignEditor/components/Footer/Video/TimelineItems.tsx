@@ -15,10 +15,10 @@ export default function () {
 
     const findScene = useCallback(
         (id: string) => {
-            const card = scenes.filter((c) => `${c.id}` === id)[0] as IScene
+            const scene = scenes.filter((c) => `${c.id}` === id)[0] as IScene
             return {
-                card,
-                index: scenes.indexOf(card),
+                scene,
+                index: scenes.indexOf(scene),
             }
         },
         [scenes],
@@ -26,12 +26,12 @@ export default function () {
 
     const moveScene = useCallback(
         (id: string, atIndex: number) => {
-            const {card, index} = findScene(id)
+            const {scene, index} = findScene(id)
             setScenes(
                 update(scenes, {
                     $splice: [
                         [index, 1],
-                        [atIndex, 0, card],
+                        [atIndex, 0, scene],
                     ],
                 }),
             )

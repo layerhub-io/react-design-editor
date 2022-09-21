@@ -69,12 +69,12 @@ export default function ({
     })
 
     const originalIndex = findScene(id).index
-    const [{isDragging}, drag] = useDrag(
+    const [{opacity}, drag] = useDrag(
         () => ({
             type: ItemTypes.SCENE,
             item: {id, originalIndex},
             collect: (monitor) => ({
-                isDragging: monitor.isDragging(),
+                opacity: monitor.isDragging() ? 0.4 : 1,
             }),
             end: (item, monitor) => {
                 const {id: droppedId, originalIndex} = item
@@ -186,6 +186,7 @@ export default function ({
                     drag(drop(ref))
                 }}
                 $style={{
+                    opacity: opacity,
                     background: "rgb(243,244,246)",
                     width: "100%",
                     height: "100%",
