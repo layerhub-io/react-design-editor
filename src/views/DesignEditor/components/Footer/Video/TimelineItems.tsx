@@ -12,6 +12,7 @@ export default function () {
     const {currentScene, scenes, currentPreview, setCurrentPreview, setScenes} = React.useContext(DesignEditorContext)
     const editor = useEditor()
     const frame = useFrame()
+    const [, drop] = useDrop(() => ({accept: ItemTypes.SCENE}))
 
     const findScene = useCallback(
         (id: string) => {
@@ -71,8 +72,6 @@ export default function () {
         },
         [scenes]
     )
-
-    const [, drop] = useDrop(() => ({accept: ItemTypes.SCENE}))
 
     return (
         <Block ref={drop} $style={{display: "flex"}}>

@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useCallback, useState} from "react"
 import {useStyletron} from "baseui"
 import Add from "~/components/Icons/Add"
 import useDesignEditorPages from "~/hooks/useDesignEditorScenes"
@@ -12,6 +12,9 @@ import ScenesContextMenu from "./ScenesContextMenu";
 import useContextMenuSceneRequest from "~/hooks/useContextMenuSceneRequest";
 import useDesignEditorContext from "~/hooks/useDesignEditorContext";
 import ScenesItem from "./ScenesItem";
+import {useDrop} from "react-dnd";
+import {ItemTypes} from "~/views/DesignEditor/components/Footer/Video/itemType";
+import update from "immutability-helper";
 
 export default function () {
     const scenes = useDesignEditorPages()
@@ -21,6 +24,35 @@ export default function () {
     const contextMenuSceneRequest = useContextMenuSceneRequest()
     const [css] = useStyletron()
     const [currentPreview, setCurrentPreview] = React.useState("")
+
+    const [, drop] = useDrop(() => ({accept: ItemTypes.SCENE}))
+
+    const findScene = useCallback(
+        (id: string) => {
+            const card = scenes.filter((c) => `${c.id}` === id)[0] as IScene
+            return {
+                card,
+                index: scenes.indexOf(card),
+            }
+        },
+        [scenes],
+    )
+
+    const moveScene = useCallback(
+        (id: string, atIndex: number) => {
+            const {card, index} = findScene(id)
+            setScenes(
+                update(scenes, {
+                    $splice: [
+                        [index, 1],
+                        [atIndex, 0, card],
+                    ],
+                }),
+            )
+        },
+        [findScene, scenes, setScenes],
+    )
+
 
     React.useEffect(() => {
         if (editor && scenes && currentScene) {
