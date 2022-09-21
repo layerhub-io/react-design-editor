@@ -24,7 +24,7 @@ export default function () {
   const contextMenuTimelineRequest = useContextMenuTimelineRequest()
   const editor = useEditor()
   const [css] = useStyletron()
-  
+
   React.useEffect(() => {
     if (editor && scenes && currentScene) {
       const isCurrentSceneLoaded = scenes.find((s) => s.id === currentScene?.id)
@@ -33,16 +33,6 @@ export default function () {
       }
     }
   }, [editor, scenes, currentScene])
-
-
-    React.useEffect(() => {
-        if (editor && scenes && currentScene) {
-            const isCurrentSceneLoaded = scenes.find((s) => s.id === currentScene?.id)
-            if (!isCurrentSceneLoaded) {
-                setCurrentScene(scenes[0])
-            }
-        }
-    }, [editor, scenes, currentScene])
 
   React.useEffect(() => {
     let watcher = async () => {
@@ -69,7 +59,12 @@ export default function () {
           width: 1200,
           height: 1200,
         })
-          setCurrentDesign({
+
+        editor.scene
+          .importFromJSON(defaultTemplate)
+          .then(() => {
+            // SET INITIAL DURATION
+            setCurrentDesign({
               id: nanoid(),
               frame: defaultTemplate.frame,
               metadata: {},
@@ -77,11 +72,7 @@ export default function () {
               preview: "",
               scenes: [],
               type: "VIDEO",
-          })
-
-        editor.scene
-          .importFromJSON(defaultTemplate)
-          .then(() => {
+            })
             const initialDesign = editor.scene.exportToJSON() as any
             editor.renderer.render(initialDesign).then((data) => {
               setCurrentScene({ ...initialDesign, preview: data, duration: 5000 })
@@ -91,7 +82,7 @@ export default function () {
           .catch(console.log)
       }
     }
-  }, [editor, currentScene,scenes])
+  }, [editor, currentScene])
 
   const updateCurrentScene = React.useCallback(
     async (design: IScene) => {
