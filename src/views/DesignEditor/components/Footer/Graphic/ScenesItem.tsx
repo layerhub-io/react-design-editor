@@ -3,7 +3,7 @@ import {useStyletron} from "baseui";
 import {DesignEditorContext} from "~/contexts/DesignEditor";
 import useDesignEditorContext from "~/hooks/useDesignEditorContext";
 import {useDrag, useDrop} from "react-dnd";
-import {ItemTypes} from "~/views/DesignEditor/components/Footer/Video/itemType";
+import {ItemTypes} from "./itemType";
 
 interface Item {
     id: string
@@ -25,12 +25,10 @@ export default function ({
     const {setContextMenuSceneRequest} = useDesignEditorContext()
 
     const originalIndex = findScene(page.id).index
-    // @ts-ignore
     const [{isDragging}, drag] = useDrag(
         () => ({
             type: ItemTypes.SCENE,
-            // @ts-ignore
-            item: {id, originalIndex},
+            item: {id: page.id, originalIndex},
             collect: (monitor) => ({
                 isDragging: monitor.isDragging(),
             }),
@@ -55,8 +53,7 @@ export default function ({
                 }
             },
         }),
-        [findScene, moveScene],
-    )
+        [findScene, moveScene],)
 
     const onMouseMoveItem = (evt: any) => {
         if (sceneItemRef.current) {
@@ -99,6 +96,9 @@ export default function ({
         }}
     >
         <div
+            ref={(node: any) => {
+                drag(drop(node));
+            }}
             onClick={() => changePage(page)}
             className={css({
                 cursor: "pointer",
