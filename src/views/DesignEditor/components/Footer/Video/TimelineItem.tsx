@@ -182,7 +182,9 @@ export default function ({
         >
             <Block
                 onMouseMove={onMouseMoveItem}
-                ref={(ref: any) => drag(drop(ref))}
+                ref={(ref: any) => {
+                    drag(drop(ref))
+                }}
                 $style={{
                     background: "rgb(243,244,246)",
                     width: "100%",
