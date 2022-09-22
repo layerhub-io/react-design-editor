@@ -1,100 +1,123 @@
-import React, {useCallback} from "react"
-import {Block} from "baseui/block"
-import update from 'immutability-helper'
-import {DesignEditorContext} from "~/contexts/DesignEditor"
+import React from "react"
+import { DesignEditorContext } from "~/contexts/DesignEditor"
+import { useEditor, useFrame } from "@layerhub-io/react"
+import { DndContext, closestCenter, PointerSensor, useSensor, DragOverlay } from "@dnd-kit/core"
+import { arrayMove, SortableContext, horizontalListSortingStrategy } from "@dnd-kit/sortable"
+import { restrictToFirstScrollableAncestor, restrictToHorizontalAxis } from "@dnd-kit/modifiers"
 import TimelineItem from "./TimelineItem"
-import {useEditor, useFrame} from "@layerhub-io/react"
-import {IScene} from "@layerhub-io/types";
-import {useDrop} from "react-dnd";
-import {ItemTypes} from "~/views/DesignEditor/components/Footer/Video/itemType";
+import { Block } from "baseui/block"
+import { IScene } from "@layerhub-io/types"
 
 export default function () {
-    const {currentScene, scenes, currentPreview, setCurrentPreview, setScenes} = React.useContext(DesignEditorContext)
-    const editor = useEditor()
-    const frame = useFrame()
+  const { currentScene, scenes, currentPreview, setCurrentPreview, setScenes } = React.useContext(DesignEditorContext)
+  const editor = useEditor()
+  const frame = useFrame()
+  const [draggedScene, setDraggedScene] = React.useState<IScene | null>(null)
 
-    const findScene = useCallback(
-        (id: string) => {
-            const card = scenes.filter((c) => `${c.id}` === id)[0] as IScene
-            return {
-                card,
-                index: scenes.indexOf(card),
-            }
-        },
-        [scenes],
-    )
+  const sensors = [
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+  ]
 
-    const moveScene = useCallback(
-        (id: string, atIndex: number) => {
-            const {card, index} = findScene(id)
-            setScenes(
-                update(scenes, {
-                    $splice: [
-                        [index, 1],
-                        [atIndex, 0, card],
-                    ],
-                }),
-            )
-        },
-        [findScene, scenes, setScenes],
-    )
-
-    React.useEffect(() => {
-        let watcher = async () => {
-            const updatedTemplate = editor.scene.exportToJSON()
-            const updatedPreview = (await editor.renderer.render(updatedTemplate)) as any
-            setCurrentPreview(updatedPreview)
+  const makeResizeTimelineItem = React.useCallback(
+    (id: string, props: any) => {
+      const updatedItems = scenes.map((scene) => {
+        if (scene.id === id) {
+          console.log(props)
+          return {
+            ...scene,
+            duration: props.width * 40,
+          }
         }
-        if (editor) {
-            editor.on("history:changed", watcher)
-        }
-        return () => {
-            if (editor) {
-                editor.off("history:changed", watcher)
-            }
-        }
-    }, [editor])
+        return scene
+      })
 
-    const makeResizeTimelineItem = React.useCallback(
-        (id: string, props: any) => {
-            const updatedItems = scenes.map((scene) => {
-                if (scene.id === id) {
-                    return {
-                        ...scene,
-                        duration: props.width * 40,
-                    }
-                }
-                return scene
-            })
+      setScenes(updatedItems)
+    },
+    [scenes]
+  )
 
-            setScenes(updatedItems)
-        },
-        [scenes]
-    )
+  function handleDragStart(event: any) {
+    const draggedScene = scenes.find((s) => s.id === event.active.id)
+    if (draggedScene) {
+      setDraggedScene(draggedScene)
+    }
+  }
 
-    const [, drop] = useDrop(() => ({accept: ItemTypes.SCENE}))
+  function handleDragEnd(event: any) {
+    const { active, over } = event
 
-    return (
-        <Block ref={drop} $style={{display: "flex"}}>
-            {scenes.map((page) => {
-                return (
-                    <TimelineItem
-                        makeResizeTimelineItem={makeResizeTimelineItem}
-                        width={page.duration ? page.duration / 40 : 5000 / 40}
-                        duration={page.duration ? page.duration : 5000}
-                        height={70}
-                        key={page.id}
-                        frame={frame}
-                        id={page.id}
-                        moveScene={moveScene}
-                        findScene={findScene}
-                        preview={currentPreview && page.id === currentScene?.id ? currentPreview : page.preview || ""}
-                        isCurrentScene={(currentScene && currentScene.id === page.id) || false}
-                    />
-                )
-            })}
-        </Block>
-    )
+    if (active.id !== over.id) {
+      setScenes((items) => {
+        const oldIndex = items.findIndex((item) => item.id === active.id)
+        const newIndex = items.findIndex((item) => item.id === over.id)
+
+        return arrayMove(items, oldIndex, newIndex)
+      })
+    }
+    setDraggedScene(null)
+  }
+
+  React.useEffect(() => {
+    let watcher = async () => {
+      const updatedTemplate = editor.scene.exportToJSON()
+      const updatedPreview = (await editor.renderer.render(updatedTemplate)) as any
+      setCurrentPreview(updatedPreview)
+    }
+    if (editor) {
+      editor.on("history:changed", watcher)
+    }
+    return () => {
+      if (editor) {
+        editor.off("history:changed", watcher)
+      }
+    }
+  }, [editor])
+
+  return (
+    <DndContext
+      modifiers={[restrictToFirstScrollableAncestor, restrictToHorizontalAxis]}
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+    >
+      <div style={{ display: "flex" }}>
+        <SortableContext items={scenes} strategy={horizontalListSortingStrategy}>
+          {scenes.map((page) => (
+            <TimelineItem
+              key={page.id}
+              item={page}
+              makeResizeTimelineItem={makeResizeTimelineItem}
+              width={page.duration ? page.duration / 40 : 5000 / 40}
+              duration={page.duration ? page.duration : 5000}
+              height={70}
+              frame={frame}
+              id={page.id}
+              preview={currentPreview && page.id === currentScene?.id ? currentPreview : page.preview || ""}
+              isCurrentScene={(currentScene && currentScene.id === page.id) || false}
+            />
+          ))}
+        </SortableContext>
+        <DragOverlay>
+          {draggedScene ? (
+            <Block
+              $style={{
+                backgroundImage: `url(${draggedScene.preview})`,
+                backgroundSize: `${frame ? (frame.width * 70) / frame.height : 70}px 70px`,
+                backgroundRepeat: "repeat",
+                height: "70px",
+                opacity: 0.5,
+              }}
+            ></Block>
+          ) : null}
+        </DragOverlay>
+      </div>
+    </DndContext>
+  )
 }
 
 // 125px => 5s

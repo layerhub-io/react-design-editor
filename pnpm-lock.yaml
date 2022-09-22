@@ -1,6 +1,10 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@dnd-kit/core': ^6.0.5
+  '@dnd-kit/modifiers': ^6.0.0
+  '@dnd-kit/sortable': ^7.0.1
+  '@dnd-kit/utilities': ^3.2.0
   '@layerhub-io/react': ^0.2.4
   '@layerhub-io/react-custom-scrollbar': ^0.0.1
   '@layerhub-io/types': ^0.2.0
@@ -24,8 +28,6 @@ specifiers:
   pixi.js: ^6.5.0
   react: ^18.0.0
   react-colorful: ^5.5.1
-  react-dnd: ^16.0.1
-  react-dnd-html5-backend: ^16.0.1
   react-dom: ^18.0.0
   react-i18next: ^11.18.0
   react-player: ^2.10.1
@@ -41,6 +43,10 @@ specifiers:
   vite-tsconfig-paths: ^3.5.0
 
 dependencies:
+  '@dnd-kit/core': 6.0.5_biqbaboplfbrettd7655fr4n2y
+  '@dnd-kit/modifiers': 6.0.0_vvd3dzag27tc7rclyb2whqqnpe
+  '@dnd-kit/sortable': 7.0.1_vvd3dzag27tc7rclyb2whqqnpe
+  '@dnd-kit/utilities': 3.2.0_react@18.2.0
   '@layerhub-io/react': 0.2.4
   '@layerhub-io/react-custom-scrollbar': 0.0.1_react@18.2.0
   '@layerhub-io/use-timer': 0.1.1_react@18.2.0
@@ -58,8 +64,6 @@ dependencies:
   pixi.js: 6.5.0
   react: 18.2.0
   react-colorful: 5.5.1_biqbaboplfbrettd7655fr4n2y
-  react-dnd: 16.0.1_vschkakykhwwfyapt3nlgajmwq
-  react-dnd-html5-backend: 16.0.1
   react-dom: 18.2.0_react@18.2.0
   react-i18next: 11.18.0_zqwsj3zkvc6lj2if6vhvnllc7u
   react-player: 2.10.1_react@18.2.0
@@ -370,6 +374,61 @@ packages:
     dependencies:
       '@date-io/core': 2.14.0
       date-fns: 2.28.0
+    dev: false
+
+  /@dnd-kit/accessibility/3.0.1_react@18.2.0:
+    resolution: {integrity: sha512-HXRrwS9YUYQO9lFRc/49uO/VICbM+O+ZRpFDe9Pd1rwVv2PCNkRiTZRdxrDgng/UkvdC3Re9r2vwPpXXrWeFzg==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      tslib: 2.4.0
+    dev: false
+
+  /@dnd-kit/core/6.0.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-3nL+Zy5cT+1XwsWdlXIvGIFvbuocMyB4NBxTN74DeBaBqeWdH9JsnKwQv7buZQgAHmAH+eIENfS1ginkvW6bCw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@dnd-kit/accessibility': 3.0.1_react@18.2.0
+      '@dnd-kit/utilities': 3.2.0_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tslib: 2.4.0
+    dev: false
+
+  /@dnd-kit/modifiers/6.0.0_vvd3dzag27tc7rclyb2whqqnpe:
+    resolution: {integrity: sha512-V3+JSo6/BTcgPRHiNUTSKgqVv/doKXg+T4Z0QvKiiXp+uIyJTUtPkQOBRQApUWi3ApBhnoWljyt/3xxY4fTd0Q==}
+    peerDependencies:
+      '@dnd-kit/core': ^6.0.0
+    dependencies:
+      '@dnd-kit/core': 6.0.5_biqbaboplfbrettd7655fr4n2y
+      '@dnd-kit/utilities': 3.2.0_react@18.2.0
+      tslib: 2.4.0
+    transitivePeerDependencies:
+      - react
+    dev: false
+
+  /@dnd-kit/sortable/7.0.1_vvd3dzag27tc7rclyb2whqqnpe:
+    resolution: {integrity: sha512-n77qAzJQtMMywu25sJzhz3gsHnDOUlEjTtnRl8A87rWIhnu32zuP+7zmFjwGgvqfXmRufqiHOSlH7JPC/tnJ8Q==}
+    peerDependencies:
+      '@dnd-kit/core': ^6.0.4
+      react: '>=16.8.0'
+    dependencies:
+      '@dnd-kit/core': 6.0.5_biqbaboplfbrettd7655fr4n2y
+      '@dnd-kit/utilities': 3.2.0_react@18.2.0
+      react: 18.2.0
+      tslib: 2.4.0
+    dev: false
+
+  /@dnd-kit/utilities/3.2.0_react@18.2.0:
+    resolution: {integrity: sha512-h65/pn2IPCCIWwdlR2BMLqRkDxpTEONA+HQW3n765HBijLYGyrnTCLa2YQt8VVjjSQD6EfFlTE6aS2Q/b6nb2g==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      tslib: 2.4.0
     dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -923,18 +982,6 @@ packages:
       earcut: 2.2.4
       eventemitter3: 3.1.2
       url: 0.11.0
-    dev: false
-
-  /@react-dnd/asap/5.0.2:
-    resolution: {integrity: sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==}
-    dev: false
-
-  /@react-dnd/invariant/4.0.2:
-    resolution: {integrity: sha512-xKCTqAK/FFauOM9Ta2pswIyT3D8AQlfrYdOi/toTPEhqCuAs1v5tcJ3Y08Izh1cJ5Jchwy9SeAXmMg6zrKs2iw==}
-    dev: false
-
-  /@react-dnd/shallowequal/4.0.2:
-    resolution: {integrity: sha512-/RVXdLvJxLg4QKvMoM5WlwNR9ViO9z8B/qPcc+C0Sa/teJY7QG7kJ441DwzOjMYEY7GmU4dj5EcGHIkKZiQZCA==}
     dev: false
 
   /@reduxjs/toolkit/1.8.2_kkwg4cbsojnjnupd3btipussee:
@@ -1634,14 +1681,6 @@ packages:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
     dev: false
 
-  /dnd-core/16.0.1:
-    resolution: {integrity: sha512-HK294sl7tbw6F6IeuK16YSBUoorvHpY8RHO+9yFfaJyCDVb6n7PRcezrOEOa2SBCqiYpemh5Jx20ZcjKdFAVng==}
-    dependencies:
-      '@react-dnd/asap': 5.0.2
-      '@react-dnd/invariant': 4.0.2
-      redux: 4.2.0
-    dev: false
-
   /dom-css/2.1.0:
     resolution: {integrity: sha512-w9kU7FAbaSh3QKijL6n59ofAhkkmMJ31GclJIz/vyQdjogfyxcB6Zf8CZyibOERI5o0Hxz30VmJS7+7r5fEj2Q==}
     dependencies:
@@ -1944,10 +1983,6 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
-    dev: false
-
-  /fast-deep-equal/3.1.3:
-    resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: false
 
   /fast-levenshtein/2.0.6:
@@ -2614,37 +2649,6 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /react-dnd-html5-backend/16.0.1:
-    resolution: {integrity: sha512-Wu3dw5aDJmOGw8WjH1I1/yTH+vlXEL4vmjk5p+MHxP8HuHJS1lAGeIdG/hze1AvNeXWo/JgULV87LyQOr+r5jw==}
-    dependencies:
-      dnd-core: 16.0.1
-    dev: false
-
-  /react-dnd/16.0.1_vschkakykhwwfyapt3nlgajmwq:
-    resolution: {integrity: sha512-QeoM/i73HHu2XF9aKksIUuamHPDvRglEwdHL4jsp784BgUuWcg6mzfxT0QDdQz8Wj0qyRKx2eMg8iZtWvU4E2Q==}
-    peerDependencies:
-      '@types/hoist-non-react-statics': '>= 3.3.1'
-      '@types/node': '>= 12'
-      '@types/react': '>= 16'
-      react: '>= 16.14'
-    peerDependenciesMeta:
-      '@types/hoist-non-react-statics':
-        optional: true
-      '@types/node':
-        optional: true
-      '@types/react':
-        optional: true
-    dependencies:
-      '@react-dnd/invariant': 4.0.2
-      '@react-dnd/shallowequal': 4.0.2
-      '@types/node': 17.0.45
-      '@types/react': 18.0.14
-      dnd-core: 16.0.1
-      fast-deep-equal: 3.1.3
-      hoist-non-react-statics: 3.3.2
-      react: 18.2.0
     dev: false
 
   /react-dom/18.2.0_react@18.2.0:

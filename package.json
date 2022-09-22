@@ -8,6 +8,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.5",
+    "@dnd-kit/modifiers": "^6.0.0",
+    "@dnd-kit/sortable": "^7.0.1",
+    "@dnd-kit/utilities": "^3.2.0",
     "@layerhub-io/react": "^0.2.4",
     "@layerhub-io/react-custom-scrollbar": "^0.0.1",
     "@layerhub-io/use-timer": "^0.1.1",
@@ -25,8 +29,6 @@
     "pixi.js": "^6.5.0",
     "react": "^18.0.0",
     "react-colorful": "^5.5.1",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.0.0",
     "react-i18next": "^11.18.0",
     "react-player": "^2.10.1",
