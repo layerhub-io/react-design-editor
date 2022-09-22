@@ -4,7 +4,7 @@ import useDesignEditorContext from "~/hooks/useDesignEditorContext"
 import { nanoid } from "nanoid"
 import useOnClickOutside from "~/hooks/useOnClickOutside"
 import { getDefaultTemplate } from "~/constants/design-editor"
-import { useEditor, useFrame } from "@layerhub-pro/react"
+import { useEditor, useFrame } from "@layerhub-io/react"
 
 export default function () {
   const {
