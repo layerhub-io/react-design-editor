@@ -22,11 +22,9 @@ export default function () {
   const handleChange = (type: string, value: any) => {
     if (value < 0) {
       editor.zoom.zoomToRatio(zoomMin / 100)
-    }
-    else if (value > zoomMax) {
+    } else if (value > zoomMax) {
       editor.zoom.zoomToRatio(zoomMax / 100)
-    }
-    else {
+    } else {
       editor.zoom.zoomToRatio(value / 100)
     }
   }
@@ -54,12 +52,10 @@ export default function () {
         <Button kind={KIND.tertiary} size={SIZE.compact}>
           <Icons.Expand size={16} />
         </Button>
-        <Button kind={KIND.tertiary} size={SIZE.compact}
-          onClick={() => editor.zoom.zoomToFit()}>
+        <Button kind={KIND.tertiary} size={SIZE.compact} onClick={() => editor.zoom.zoomToFit()}>
           <Icons.Compress size={16} />
         </Button>
-        <Button kind={KIND.tertiary} size={SIZE.compact}
-          onClick={() => editor.zoom.zoomOut()}>
+        <Button kind={KIND.tertiary} size={SIZE.compact} onClick={() => editor.zoom.zoomOut()}>
           <Icons.RemoveCircleOutline size={24} />
         </Button>
         <Slider
@@ -85,12 +81,13 @@ export default function () {
             },
           }}
           value={[options.zoomRatio]}
-          onChange={({ value }) => { handleChange("zoomRatio", value[0]) }}
+          onChange={({ value }) => {
+            handleChange("zoomRatio", value[0])
+          }}
           min={zoomMin}
           max={zoomMax}
         />
-        <Button kind={KIND.tertiary} size={SIZE.compact}
-          onClick={() => editor.zoom.zoomIn()}>
+        <Button kind={KIND.tertiary} size={SIZE.compact} onClick={() => editor.zoom.zoomIn()}>
           <Icons.AddCircleOutline size={24} />
         </Button>
         <Input
@@ -107,7 +104,7 @@ export default function () {
           size={SIZE.mini}
           max={zoomMax}
           min={zoomMin}
-          onChange={(e: any)=> handleChange("zoomRatio", e.target.value)}
+          onChange={(e: any) => handleChange("zoomRatio", e.target.value)}
         />
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
