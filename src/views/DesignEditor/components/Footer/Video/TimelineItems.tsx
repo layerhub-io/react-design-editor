@@ -1,12 +1,12 @@
 import React from "react"
 import { DesignEditorContext } from "~/contexts/DesignEditor"
-import { useEditor, useFrame } from "@layerhub-io/react"
+import { useEditor, useFrame } from "@layerhub-pro/react"
 import { DndContext, closestCenter, PointerSensor, useSensor, DragOverlay } from "@dnd-kit/core"
 import { arrayMove, SortableContext, horizontalListSortingStrategy } from "@dnd-kit/sortable"
 import { restrictToFirstScrollableAncestor, restrictToHorizontalAxis } from "@dnd-kit/modifiers"
 import TimelineItem from "./TimelineItem"
 import { Block } from "baseui/block"
-import { IScene } from "@layerhub-io/types"
+import { IScene } from "@layerhub-pro/types"
 
 export default function () {
   const { currentScene, scenes, currentPreview, setCurrentPreview, setScenes } = React.useContext(DesignEditorContext)

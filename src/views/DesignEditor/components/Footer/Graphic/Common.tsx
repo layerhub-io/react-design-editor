@@ -1,7 +1,7 @@
 import React from "react"
 import Icons from "~/components/Icons"
 import { Button, KIND, SIZE } from "baseui/button"
-import { useZoomRatio, useEditor } from "@layerhub-io/react"
+import { useZoomRatio, useEditor } from "@layerhub-pro/react"
 import { Block } from "baseui/block"
 import { Slider } from "baseui/slider"
 import { Input } from "baseui/input"

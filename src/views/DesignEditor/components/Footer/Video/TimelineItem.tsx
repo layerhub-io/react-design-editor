@@ -107,7 +107,7 @@ export default function ({ item, makeResizeTimelineItem, width, preview, frame, 
         timeLineItemDiv.removeEventListener("contextmenu", handleContextMenu)
       }
     }
-  }, [timeLineItemRef])
+  }, [timeLineItemRef, item])
 
   return (
     <Resizable

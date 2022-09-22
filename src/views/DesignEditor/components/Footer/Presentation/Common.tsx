@@ -5,7 +5,7 @@ import Icons from "~/components/Icons"
 import { Button, KIND, SIZE } from "baseui/button"
 import { Slider } from "baseui/slider"
 import { Input } from "baseui/input"
-import { useEditor, useZoomRatio } from "@layerhub-io/react"
+import { useEditor, useZoomRatio } from "@layerhub-pro/react"
 
 const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
   height: "50px",

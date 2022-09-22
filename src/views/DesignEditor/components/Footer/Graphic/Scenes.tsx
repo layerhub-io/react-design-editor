@@ -5,13 +5,15 @@ import useDesignEditorPages from "~/hooks/useDesignEditorScenes"
 import { DesignEditorContext } from "~/contexts/DesignEditor"
 import { nanoid } from "nanoid"
 import { getDefaultTemplate } from "~/constants/design-editor"
-import { useEditor, useFrame } from "@layerhub-io/react"
-import { IScene } from "@layerhub-io/types"
+import { useEditor, useFrame } from "@layerhub-pro/react"
+import { IScene } from "@layerhub-pro/types"
 import { DndContext, closestCenter, PointerSensor, useSensor, DragOverlay } from "@dnd-kit/core"
 import { arrayMove, SortableContext, horizontalListSortingStrategy } from "@dnd-kit/sortable"
 import { restrictToFirstScrollableAncestor, restrictToHorizontalAxis } from "@dnd-kit/modifiers"
 import SceneItem from "./SceneItem"
 import { Block } from "baseui/block"
+import useContextMenuTimelineRequest from "~/hooks/useContextMenuTimelineRequest"
+import SceneContextMenu from "./SceneContextMenu"
 
 export default function () {
   const scenes = useDesignEditorPages()
@@ -22,6 +24,7 @@ export default function () {
   const [currentPreview, setCurrentPreview] = React.useState("")
   const frame = useFrame()
   const [draggedScene, setDraggedScene] = React.useState<IScene | null>(null)
+  const contextMenuTimelineRequest = useContextMenuTimelineRequest()
 
   const sensors = [
     useSensor(PointerSensor, {
@@ -169,9 +172,12 @@ export default function () {
     >
       <Block $style={{ padding: "0.25rem 0.75rem", background: "#ffffff" }}>
         <div className={css({ display: "flex", alignItems: "center" })}>
+          {contextMenuTimelineRequest.visible && <SceneContextMenu />}
+
           <SortableContext items={scenes} strategy={horizontalListSortingStrategy}>
             {scenes.map((page, index) => (
               <SceneItem
+                key={index}
                 isCurrentScene={page.id === currentScene?.id}
                 scene={page}
                 index={index}
