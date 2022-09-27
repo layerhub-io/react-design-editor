@@ -12,9 +12,9 @@ import { addPage } from "./store/slices/design-editor/actions"
 export default function Pages() {
   const [isOpen, setIsOpen] = React.useState(false)
   const pages = useSelector(selectPages)
-  const dispach = useAppDispatch()
+  const dispatch = useAppDispatch()
   const handleAddPage = () => {
-    dispach(
+    dispatch(
       addPage({
         id: nanoid(),
         name: "New page",
