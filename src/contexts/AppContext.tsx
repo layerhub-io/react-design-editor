@@ -36,7 +36,7 @@ export const AppContext = createContext<IAppContext>({
   setCurrentTemplate: {},
 })
 
-const AppProvider = ({ children }: { children: React.ReactNode }) => {
+export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined)
   const [templates, setTemplates] = useState<Template[]>([])
   const [uploads, setUploads] = useState<any[]>([])
@@ -62,5 +62,3 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>
 }
-
-export default AppProvider
