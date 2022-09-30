@@ -12,7 +12,7 @@
     "@dnd-kit/modifiers": "^6.0.0",
     "@dnd-kit/sortable": "^7.0.1",
     "@dnd-kit/utilities": "^3.2.0",
-    "@layerhub-io/react": "^0.2.4",
+    "@layerhub-io/react": "^0.3.0",
     "@layerhub-io/react-custom-scrollbar": "^0.0.1",
     "@layerhub-io/use-timer": "^0.1.1",
     "@reduxjs/toolkit": "^1.8.1",
@@ -41,7 +41,7 @@
     "use-latest": "^1.2.1"
   },
   "devDependencies": {
-    "@layerhub-io/types": "^0.2.0",
+    "@layerhub-io/types": "^0.3.0",
     "@types/lodash": "^4.14.182",
     "@types/mime": "^2.0.3",
     "@types/react": "^18.0.0",
