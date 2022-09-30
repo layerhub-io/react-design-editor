@@ -8,7 +8,7 @@ import { vectors } from "~/constants/mock-data"
 import { useEditor } from "@layerhub-io/react"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
-export default function () {
+const Graphics = () => {
   const inputFileRef = React.useRef<HTMLInputElement>(null)
 
   const editor = useEditor()
@@ -62,7 +62,7 @@ export default function () {
         </Block>
       </Block>
 
-      <Block padding={"0 1.5rem"}>
+      <Block padding="0 1.5rem">
         <Button
           onClick={handleInputFileRefClick}
           size={SIZE.compact}
@@ -91,7 +91,7 @@ export default function () {
   )
 }
 
-function GraphicItem({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) {
+const GraphicItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
   const [css] = useStyletron()
   return (
     <div
@@ -142,7 +142,7 @@ function GraphicItem({ preview, onClick }: { preview: any; onClick?: (option: an
             opacity: 1,
           },
         })}
-      ></div>
+      />
       <img
         src={preview}
         className={css({
@@ -156,3 +156,5 @@ function GraphicItem({ preview, onClick }: { preview: any; onClick?: (option: an
     </div>
   )
 }
+
+export default Graphics

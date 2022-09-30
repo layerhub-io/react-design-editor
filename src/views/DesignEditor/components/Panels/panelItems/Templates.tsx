@@ -11,7 +11,7 @@ import useDesignEditorContext from "~/hooks/useDesignEditorContext"
 import useEditorType from "~/hooks/useEditorType"
 import { loadVideoEditorAssets } from "~/utils/video"
 
-export default function () {
+const Templates = () => {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
   const { setCurrentScene, currentScene } = useDesignEditorContext()
@@ -70,7 +70,7 @@ export default function () {
   )
 }
 
-function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) {
+const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
   const [css] = useStyletron()
   return (
     <div
@@ -118,7 +118,7 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
             opacity: 1,
           },
         })}
-      ></div>
+      />
       <img
         src={preview}
         className={css({
@@ -132,3 +132,5 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
     </div>
   )
 }
+
+export default Templates

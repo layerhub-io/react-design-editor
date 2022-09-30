@@ -22,7 +22,7 @@ interface State {
   backgroundColor: string
 }
 
-export default function () {
+const Customize = () => {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
 
@@ -58,13 +58,13 @@ export default function () {
         </Block>
       </Block>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Block padding="0 1.5rem">
           <Block>
             <ResizeTemplate />
             <Block $style={{ fontSize: "14px", textAlign: "center", paddingTop: "0.35rem" }}>1080 x 1920px</Block>
           </Block>
 
-          <Block paddingTop={"0.5rem"}>
+          <Block paddingTop="0.5rem">
             <div
               style={{
                 background: "#fafafa",
@@ -107,7 +107,7 @@ export default function () {
                       />
                     </div>
                   }
-                  accessibilityType={"tooltip"}
+                  accessibilityType="tooltip"
                 >
                   <div>
                     <div
@@ -151,7 +151,7 @@ export default function () {
                       height: "34px",
                       cursor: "pointer",
                     }}
-                  ></div>
+                  />
                 ))}
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function () {
   )
 }
 
-function ResizeTemplate() {
+const ResizeTemplate = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [activeKey, setActiveKey] = React.useState<string | number>("0")
   const { currentDesign, setCurrentDesign } = useDesignEditorContext()
@@ -232,7 +232,7 @@ function ResizeTemplate() {
         isOpen={isOpen}
         animate
         autoFocus
-        size={"auto"}
+        size="auto"
         role={ROLE.dialog}
         overrides={{
           Dialog: {
@@ -361,3 +361,5 @@ function ResizeTemplate() {
     </>
   )
 }
+
+export default Customize

@@ -7,7 +7,7 @@ import { images } from "~/constants/mock-data"
 import { useEditor } from "@layerhub-io/react"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
-export default function () {
+const Images = () => {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
 
@@ -42,7 +42,7 @@ export default function () {
         </Block>
       </Block>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Block padding="0 1.5rem">
           <div style={{ display: "grid", gap: "8px", gridTemplateColumns: "1fr 1fr" }}>
             {images.map((image, index) => {
               return <ImageItem key={index} onClick={() => addObject(image.src.large)} preview={image.src.small} />
@@ -54,7 +54,7 @@ export default function () {
   )
 }
 
-function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) {
+const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
   const [css] = useStyletron()
   return (
     <div
@@ -102,7 +102,7 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
             opacity: 1,
           },
         })}
-      ></div>
+      />
       <img
         src={preview}
         className={css({
@@ -116,3 +116,5 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
     </div>
   )
 }
+
+export default Images

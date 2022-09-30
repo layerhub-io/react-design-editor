@@ -7,7 +7,7 @@ import { StatefulTooltip } from "baseui/tooltip"
 import FlipHorizontal from "~/components/Icons/FlipHorizontal"
 import FlipVertical from "~/components/Icons/FlipVertical"
 
-export default function () {
+const Flip = () => {
   const editor = useEditor()
   const activeObject = useActiveObject() as any
   const [state, setState] = React.useState({ flipX: false, flipY: false })
@@ -35,7 +35,7 @@ export default function () {
     <StatefulPopover
       placement={PLACEMENT.bottom}
       content={() => (
-        <Block width={"180px"} padding={"12px"} backgroundColor={"#ffffff"}>
+        <Block width="180px" padding="12px" backgroundColor="#ffffff">
           <Block>
             <Button
               $style={{ width: "100%", justifyContent: "flex-start" }}
@@ -60,7 +60,7 @@ export default function () {
       )}
     >
       <Block>
-        <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Layers">
+        <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType="tooltip" content="Layers">
           <Button size={SIZE.compact} kind={KIND.tertiary}>
             Flip
           </Button>
@@ -69,3 +69,5 @@ export default function () {
     </StatefulPopover>
   )
 }
+
+export default Flip

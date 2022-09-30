@@ -8,7 +8,7 @@ import { useTimer } from "@layerhub-io/use-timer"
 import { getDefaultTemplate } from "~/constants/design-editor"
 import { useEditor, useFrame } from "@layerhub-io/react"
 
-export default function () {
+const TimelineContextMenu = () => {
   const { time, setTime } = useTimer()
   const {
     scenes,
@@ -124,3 +124,5 @@ export default function () {
     </Block>
   )
 }
+
+export default TimelineContextMenu

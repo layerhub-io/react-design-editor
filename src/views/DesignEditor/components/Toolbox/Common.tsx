@@ -20,7 +20,7 @@ import SendToBack from "~/components/Icons/SendToBack"
 import AlignBottom from "~/components/Icons/AlignBottom"
 import Opacity from "./Shared/Opacity"
 
-export default function () {
+const Common = () => {
   const [state, setState] = React.useState({ isGroup: false, isMultiple: false })
   const activeObject = useActiveObject() as any
 
@@ -80,12 +80,12 @@ export default function () {
       <CommonAlign />
       <Opacity />
       <LockUnlock />
-      <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Duplicate">
+      <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType="tooltip" content="Duplicate">
         <Button onClick={() => editor.objects.clone()} size={SIZE.mini} kind={KIND.tertiary}>
           <DuplicateIcon size={22} />
         </Button>
       </StatefulTooltip>
-      <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Delete">
+      <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType="tooltip" content="Delete">
         <Button onClick={() => editor.objects.remove()} size={SIZE.mini} kind={KIND.tertiary}>
           <DeleteIcon size={24} />
         </Button>
@@ -94,7 +94,7 @@ export default function () {
   )
 }
 
-function CommonLayers() {
+const CommonLayers = () => {
   const editor = useEditor()
   const [checked, setChecked] = React.useState(true)
   const activeObject = useActiveObject()
@@ -109,8 +109,8 @@ function CommonLayers() {
     <StatefulPopover
       placement={PLACEMENT.bottomRight}
       content={() => (
-        <Block padding={"12px"} backgroundColor={"#ffffff"}>
-          <Block display={"grid"} gridTemplateColumns={"1fr 1fr"} gridGap={"8px"}>
+        <Block padding="12px" backgroundColor="#ffffff">
+          <Block display="grid" gridTemplateColumns="1fr 1fr" gridGap="8px">
             <Button
               startEnhancer={<BringToFront size={24} />}
               onClick={() => editor.objects.bringToFront()}
@@ -167,7 +167,7 @@ function CommonLayers() {
       autoFocus
     >
       <Block>
-        <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Layers">
+        <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType="tooltip" content="Layers">
           <Button size={SIZE.mini} kind={KIND.tertiary}>
             <LayersIcon size={19} />
           </Button>
@@ -177,19 +177,13 @@ function CommonLayers() {
   )
 }
 
-function CommonAlign() {
+const CommonAlign = () => {
   const editor = useEditor()
   return (
     <StatefulPopover
       placement={PLACEMENT.bottomRight}
       content={() => (
-        <Block
-          padding={"12px"}
-          backgroundColor={"#ffffff"}
-          display={"grid"}
-          gridTemplateColumns={"1fr 1fr 1fr"}
-          gridGap={"8px"}
-        >
+        <Block padding="12px" backgroundColor="#ffffff" display="grid" gridTemplateColumns="1fr 1fr 1fr" gridGap="8px">
           <Button onClick={() => editor.objects.alignLeft()} kind={KIND.tertiary} size={SIZE.mini}>
             <AlignLeft size={24} />
           </Button>
@@ -214,7 +208,7 @@ function CommonAlign() {
       autoFocus
     >
       <Block>
-        <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Align">
+        <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType="tooltip" content="Align">
           <Button size={SIZE.mini} kind={KIND.tertiary}>
             <AlignCenter size={24} />
           </Button>
@@ -224,7 +218,7 @@ function CommonAlign() {
   )
 }
 
-function LockUnlock() {
+const LockUnlock = () => {
   const [state, setState] = React.useState<{ locked: boolean }>({ locked: false })
   const editor = useEditor()
   const activeObject = useActiveObject()
@@ -236,35 +230,33 @@ function LockUnlock() {
     }
   }, [activeObject])
 
-  return (
-    <>
-      {state.locked ? (
-        <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Lock">
-          <Button
-            onClick={() => {
-              editor.objects.unlock()
-              setState({ locked: false })
-            }}
-            size={SIZE.mini}
-            kind={KIND.tertiary}
-          >
-            <UnlockedIcon size={24} />
-          </Button>
-        </StatefulTooltip>
-      ) : (
-        <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType={"tooltip"} content="Lock">
-          <Button
-            onClick={() => {
-              editor.objects.lock()
-              setState({ locked: true })
-            }}
-            size={SIZE.mini}
-            kind={KIND.tertiary}
-          >
-            <LockedIcon size={24} />
-          </Button>
-        </StatefulTooltip>
-      )}
-    </>
+  return state.locked ? (
+    <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType="tooltip" content="Lock">
+      <Button
+        onClick={() => {
+          editor.objects.unlock()
+          setState({ locked: false })
+        }}
+        size={SIZE.mini}
+        kind={KIND.tertiary}
+      >
+        <UnlockedIcon size={24} />
+      </Button>
+    </StatefulTooltip>
+  ) : (
+    <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType="tooltip" content="Lock">
+      <Button
+        onClick={() => {
+          editor.objects.lock()
+          setState({ locked: true })
+        }}
+        size={SIZE.mini}
+        kind={KIND.tertiary}
+      >
+        <LockedIcon size={24} />
+      </Button>
+    </StatefulTooltip>
   )
 }
+
+export default Common

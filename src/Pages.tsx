@@ -9,7 +9,7 @@ import { nanoid } from "nanoid"
 import { useAppDispatch } from "./store/store"
 import { addPage } from "./store/slices/design-editor/actions"
 
-export default function Pages() {
+const Pages = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const pages = useSelector(selectPages)
   const dispatch = useAppDispatch()
@@ -72,3 +72,5 @@ export default function Pages() {
     </ThemeProvider>
   )
 }
+
+export default Pages

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import DesignEditor from "~/views/DesignEditor"
 import Dashboard from "~/views/Dashboard"
 
-function Router() {
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>

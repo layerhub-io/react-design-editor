@@ -5,7 +5,7 @@ import { useEditor } from "@layerhub-io/react"
 import Loading from "~/components/Loading"
 import useDesignEditorPages from "~/hooks/useDesignEditorScenes"
 
-function Video() {
+const Video = () => {
   const editor = useEditor()
   const pages = useDesignEditorPages()
   const [loading, setLoading] = React.useState(true)
@@ -65,8 +65,8 @@ function Video() {
         <ReactPlayer
           muted={false}
           className="react-player"
-          width={"100%"}
-          height={"100%"}
+          width="100%"
+          height="100%"
           controls
           autoPlay
           url={state.video}

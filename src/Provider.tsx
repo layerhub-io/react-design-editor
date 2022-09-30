@@ -4,7 +4,7 @@ import { Client as Styletron } from "styletron-engine-atomic"
 import { Provider as StyletronProvider } from "styletron-react"
 import { BaseProvider, LightTheme } from "baseui"
 import { store } from "./store/store"
-import { Provider } from "react-redux"
+import { Provider as ReduxProvier } from "react-redux"
 import { AppProvider } from "./contexts/AppContext"
 import { DesignEditorProvider } from "./contexts/DesignEditor"
 import { I18nextProvider } from "react-i18next"
@@ -14,9 +14,9 @@ import "./translations"
 
 const engine = new Styletron()
 
-export default function ({ children }: { children: React.ReactNode }) {
+const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Provider store={store}>
+    <ReduxProvier store={store}>
       <DesignEditorProvider>
         <TimerProvider>
           <AppProvider>
@@ -30,6 +30,8 @@ export default function ({ children }: { children: React.ReactNode }) {
           </AppProvider>
         </TimerProvider>
       </DesignEditorProvider>
-    </Provider>
+    </ReduxProvier>
   )
 }
+
+export default Provider

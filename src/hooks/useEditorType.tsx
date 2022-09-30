@@ -1,7 +1,9 @@
 import { useContext } from "react"
 import { DesignEditorContext } from "~/contexts/DesignEditor"
 
-export default function () {
+const useEditorType = () => {
   const { editorType } = useContext(DesignEditorContext)
   return editorType
 }
+
+export default useEditorType

@@ -77,7 +77,7 @@ const EFFECTS = {
     },
   },
 }
-export default function () {
+const TextEffects = () => {
   const [color, setColor] = React.useState("#b32aa9")
   const activeObject = useActiveObject()
   const editor = useEditor()
@@ -117,7 +117,7 @@ export default function () {
         </Block>
       </Block>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Block padding="0 1.5rem">
           <Block $style={{ display: "grid", gridTemplateColumns: "80px 80px 80px", gap: "0.5rem" }}>
             {TEXT_EFFECTS.map((effect, index) => {
               return (
@@ -156,3 +156,5 @@ export default function () {
     </Block>
   )
 }
+
+export default TextEffects

@@ -1,16 +1,16 @@
 import React from "react"
-import { Canvas } from "@layerhub-io/react"
+import { Canvas as LayerhubCanvas } from "@layerhub-io/react"
 import Playback from "../Playback"
 import useDesignEditorContext from "~/hooks/useDesignEditorContext"
 import ContextMenu from "../ContextMenu"
 
-export default function () {
+const Canvas = () => {
   const { displayPlayback } = useDesignEditorContext()
   return (
     <div style={{ flex: 1, display: "flex", position: "relative" }}>
       {displayPlayback && <Playback />}
       <ContextMenu />
-      <Canvas
+      <LayerhubCanvas
         config={{
           background: "#f1f2f6",
           controlsPosition: {
@@ -27,3 +27,5 @@ export default function () {
     </div>
   )
 }
+
+export default Canvas

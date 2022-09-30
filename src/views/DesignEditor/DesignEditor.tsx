@@ -7,7 +7,7 @@ import useDesignEditorContext from "~/hooks/useDesignEditorContext"
 import Preview from "./components/Preview"
 import ContextMenu from "./components/ContextMenu"
 
-function DesignEditor() {
+const DesignEditor = () => {
   const editorType = useEditorType()
   const { displayPreview, setDisplayPreview } = useDesignEditorContext()
 

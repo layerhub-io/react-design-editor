@@ -9,7 +9,7 @@ import { useSelector } from "react-redux"
 import { selectPixabayResources } from "~/store/slices/resources/selectors"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
-export default function () {
+const Pixabay = () => {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
 
@@ -45,7 +45,7 @@ export default function () {
         </Block>
       </Block>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Block padding="0 1.5rem">
           <div style={{ display: "grid", gap: "0.5rem", gridTemplateColumns: "1fr 1fr" }}>
             {pixabayResources.map((image, index) => {
               return <ImageItem key={index} onClick={() => addObject(image.src)} preview={image.preview} />
@@ -57,7 +57,7 @@ export default function () {
   )
 }
 
-function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) {
+const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
   const [css] = useStyletron()
   return (
     <div
@@ -105,7 +105,7 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
             opacity: 1,
           },
         })}
-      ></div>
+      />
       <img
         src={preview}
         className={css({
@@ -119,3 +119,5 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
     </div>
   )
 }
+
+export default Pixabay

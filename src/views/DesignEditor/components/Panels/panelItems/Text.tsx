@@ -11,7 +11,7 @@ import AngleDoubleLeft from "~/components/Icons/AngleDoubleLeft"
 import Scrollable from "~/components/Scrollable"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
-export default function () {
+const Text = () => {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
 
@@ -54,12 +54,12 @@ export default function () {
         await loadFonts(filteredFonts)
       } else {
         if (component.type === "StaticText" || component.type === "DynamicText") {
-          fontItemsList.push({
-            name: component.fontFamily,
-            url: component.fontURL,
-          })
-          await loadFonts(fontItemsList)
-        }
+        fontItemsList.push({
+          name: component.fontFamily,
+          url: component.fontURL,
+        })
+        await loadFonts(fontItemsList)
+      }
       }
       editor.objects.add(component)
     }
@@ -82,7 +82,7 @@ export default function () {
         </Block>
       </Block>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Block padding="0 1.5rem">
           <Button
             onClick={addObject}
             size={SIZE.compact}
@@ -121,7 +121,7 @@ interface TextComponent {
     preview: string
   }
 }
-function TextComponentItem({ component, onClick }: { component: any; onClick: (option: any) => void }) {
+const TextComponentItem = ({ component, onClick }: { component: any; onClick: (option: any) => void }) => {
   const [css] = useStyletron()
   return (
     <div
@@ -171,7 +171,7 @@ function TextComponentItem({ component, onClick }: { component: any; onClick: (o
             opacity: 1,
           },
         })}
-      ></div>
+      />
       <img
         src={component.preview}
         className={css({
@@ -185,3 +185,5 @@ function TextComponentItem({ component, onClick }: { component: any; onClick: (o
     </div>
   )
 }
+
+export default Text

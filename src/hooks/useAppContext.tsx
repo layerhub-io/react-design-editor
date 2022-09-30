@@ -1,7 +1,7 @@
 import { AppContext } from "~/contexts/AppContext"
 import { useContext } from "react"
 
-function useAppContext() {
+const useAppContext = () => {
   const {
     isMobile,
     setIsMobile,

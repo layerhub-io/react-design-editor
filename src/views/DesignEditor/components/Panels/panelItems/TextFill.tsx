@@ -21,7 +21,7 @@ const PRESET_COLORS = [
   "#d9d9d9",
 ]
 
-export default function () {
+const TextFill = () => {
   const [color, setColor] = React.useState("#b32aa9")
   const activeObject = useActiveObject()
   const editor = useEditor()
@@ -52,7 +52,7 @@ export default function () {
         </Block>
       </Block>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Block padding="0 1.5rem">
           <HexColorPicker onChange={updateObjectFill} style={{ width: "100%" }} />
           <Block>
             <Block $style={{ padding: "0.75rem 0", fontWeight: 500, fontSize: "14px" }}>Preset colors</Block>
@@ -64,9 +64,9 @@ export default function () {
                   }}
                   onClick={() => updateObjectFill(color)}
                   backgroundColor={color}
-                  height={"38px"}
+                  height="38px"
                   key={index}
-                ></Block>
+                />
               ))}
             </Block>
           </Block>
@@ -75,3 +75,5 @@ export default function () {
     </Block>
   )
 }
+
+export default TextFill

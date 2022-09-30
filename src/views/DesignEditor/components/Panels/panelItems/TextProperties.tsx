@@ -19,7 +19,7 @@ import { loadFonts } from "~/utils/fonts"
 import { TextOptions } from "~/interfaces/editor"
 import { defaultTextOptions } from "~/constants/contants"
 
-export default function () {
+const TextProperties = () => {
   const fonts = useSelector(selectFonts)
   const [state, setState] = React.useState<TextOptions>(defaultTextOptions)
   const { setActiveSubMenu } = useAppContext()
@@ -136,18 +136,10 @@ export default function () {
         </div>
       </div>
       <div style={{ padding: "0 1.5rem" }}>
-        <Button
-          size="compact"
-          onClick={() => handleChange("underline", activeObject.underline ? false : true)}
-          kind="tertiary"
-        >
+        <Button size="compact" onClick={() => handleChange("underline", !activeObject.underline)} kind="tertiary">
           <Spacing size={24} />
         </Button>
-        <Button
-          size="compact"
-          onClick={() => handleChange("underline", activeObject.underline ? false : true)}
-          kind="tertiary"
-        >
+        <Button size="compact" onClick={() => handleChange("underline", !activeObject.underline)} kind="tertiary">
           <Underline size={24} />
         </Button>
       </div>
@@ -157,3 +149,5 @@ export default function () {
     </div>
   )
 }
+
+export default TextProperties

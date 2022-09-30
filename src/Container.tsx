@@ -8,7 +8,7 @@ import { getPixabayResources } from "./store/slices/resources/actions"
 import { getUploads } from "./store/slices/uploads/actions"
 import { useAppDispatch } from "./store/store"
 
-function Container({ children }: { children: React.ReactNode }) {
+const Container = ({ children }: { children: React.ReactNode }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { isMobile, setIsMobile } = useAppContext()
   const [loaded, setLoaded] = useState(false)

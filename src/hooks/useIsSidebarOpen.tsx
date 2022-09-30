@@ -1,7 +1,9 @@
 import { useContext } from "react"
 import { DesignEditorContext } from "~/contexts/DesignEditor"
 
-export default function () {
+const useIsSidebarOpen = () => {
   const { isSidebarOpen } = useContext(DesignEditorContext)
   return isSidebarOpen
 }
+
+export default useIsSidebarOpen

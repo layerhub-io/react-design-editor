@@ -24,7 +24,7 @@ const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
   alignItems: "center",
 }))
 
-export default function () {
+const Navbar = () => {
   const { setDisplayPreview, setScenes, setCurrentDesign, currentDesign, scenes } = useDesignEditorContext()
   const editorType = useEditorType()
   const editor = useEditor()
@@ -135,7 +135,7 @@ export default function () {
   }
 
   const makeDownload = (data: Object) => {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data))
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`
     const a = document.createElement("a")
     a.href = dataStr
     a.download = "template.json"
@@ -149,7 +149,7 @@ export default function () {
       } else if (editorType === "PRESENTATION") {
         return parsePresentationJSON()
       } else {
-        return parseVideoJSON()
+      return parseVideoJSON()
       }
     }
   }
@@ -340,3 +340,5 @@ export default function () {
     </ThemeProvider>
   )
 }
+
+export default Navbar

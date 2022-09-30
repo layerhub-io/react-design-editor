@@ -8,7 +8,7 @@ import { useEditor } from "@layerhub-io/react"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 import { nanoid } from "nanoid"
 
-export default function () {
+const Uploads = () => {
   const inputFileRef = React.useRef<HTMLInputElement>(null)
   const [uploads, setUploads] = React.useState<any[]>([])
   const editor = useEditor()
@@ -58,7 +58,7 @@ export default function () {
           </Block>
         </Block>
         <Scrollable>
-          <Block padding={"0 1.5rem"}>
+          <Block padding="0 1.5rem">
             <Button
               onClick={handleInputFileRefClick}
               size={SIZE.compact}
@@ -104,3 +104,5 @@ export default function () {
     </DropZone>
   )
 }
+
+export default Uploads

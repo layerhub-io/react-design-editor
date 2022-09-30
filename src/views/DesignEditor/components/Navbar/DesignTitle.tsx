@@ -10,7 +10,7 @@ interface State {
   width: number
 }
 
-export default function () {
+const DesignTitle = () => {
   const [state, setState] = React.useState<State>({ name: "My first design.", width: 0 })
   const { currentDesign, setCurrentDesign } = useDesignEditorContext()
   const inputTitleRef = React.useRef<Input>(null)
@@ -58,7 +58,7 @@ export default function () {
           {state.name}
         </Block>
       </Block>
-      <Block width={`${state.width}px`} display={"flex"}>
+      <Block width={`${state.width}px`} display="flex">
         <Input
           onChange={(e: any) => handleInputChange(e.target.value)}
           overrides={{
@@ -103,7 +103,7 @@ export default function () {
             },
           },
         }}
-        content={() => <Block backgroundColor={"#ffffff"}>{"All changes are saved"}</Block>}
+        content={() => <Block backgroundColor="#ffffff">All changes are saved</Block>}
       >
         <Block
           $style={{
@@ -119,3 +119,5 @@ export default function () {
     </Block>
   )
 }
+
+export default DesignTitle

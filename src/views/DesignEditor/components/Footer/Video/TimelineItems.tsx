@@ -8,7 +8,7 @@ import TimelineItem from "./TimelineItem"
 import { Block } from "baseui/block"
 import { IScene } from "@layerhub-io/types"
 
-export default function () {
+const TimelineItems = () => {
   const { currentScene, scenes, currentPreview, setCurrentPreview, setScenes } = React.useContext(DesignEditorContext)
   const editor = useEditor()
   const frame = useFrame()
@@ -40,14 +40,14 @@ export default function () {
     [scenes]
   )
 
-  function handleDragStart(event: any) {
+  const handleDragStart = (event: any) => {
     const draggedScene = scenes.find((s) => s.id === event.active.id)
     if (draggedScene) {
       setDraggedScene(draggedScene)
     }
   }
 
-  function handleDragEnd(event: any) {
+  const handleDragEnd = (event: any) => {
     const { active, over } = event
 
     if (active.id !== over.id) {
@@ -73,7 +73,7 @@ export default function () {
             duration: scene.duration,
           }
         } else {
-          return scene
+        return scene
         }
       })
       setScenes(updatedScenes)
@@ -124,13 +124,15 @@ export default function () {
                 height: "70px",
                 opacity: 0.5,
               }}
-            ></Block>
+            />
           ) : null}
         </DragOverlay>
       </div>
     </DndContext>
   )
 }
+
+export default TimelineItems
 
 // 125px => 5s
 // 25px => 1s

@@ -1,7 +1,6 @@
-import { useStyletron } from "baseui"
+import { useStyletron, styled } from "baseui"
 import { BASE_ITEMS, VIDEO_PANEL_ITEMS } from "~/constants/app-options"
 import useAppContext from "~/hooks/useAppContext"
-import { styled } from "baseui"
 import Icons from "~/components/Icons"
 import { useTranslation } from "react-i18next"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
@@ -15,7 +14,7 @@ const Container = styled("div", (props) => ({
   display: "flex",
 }))
 
-function PanelsList() {
+const PanelsList = () => {
   const { activePanel } = useAppContext()
   const { t } = useTranslation("editor")
   const editorType = useEditorType()
@@ -37,7 +36,7 @@ function PanelsList() {
   )
 }
 
-function PanelListItem({ label, icon, activePanel, name }: any) {
+const PanelListItem = ({ label, icon, activePanel, name }: any) => {
   const { setActivePanel } = useAppContext()
   const setIsSidebarOpen = useSetIsSidebarOpen()
   const [css, theme] = useStyletron()
@@ -45,7 +44,7 @@ function PanelListItem({ label, icon, activePanel, name }: any) {
   const Icon = Icons[icon]
   return (
     <Block
-      id={"EditorPanelList"}
+      id="EditorPanelList"
       onClick={() => {
         setIsSidebarOpen(true)
         setActivePanel(name)

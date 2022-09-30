@@ -6,7 +6,7 @@ import useOnClickOutside from "~/hooks/useOnClickOutside"
 import { getDefaultTemplate } from "~/constants/design-editor"
 import { useEditor, useFrame } from "@layerhub-io/react"
 
-export default function () {
+const SceneContextMenu = () => {
   const {
     scenes,
     setScenes,
@@ -51,8 +51,8 @@ export default function () {
       })
       const initialDesign = editor.scene.exportToJSON() as any
       const preview = await editor.renderer.render(initialDesign)
-      setCurrentScene({ ...initialDesign, preview: preview, duration: 5000 })
-      setScenes([{ ...initialDesign, preview: preview, duration: 5000 }])
+      setCurrentScene({ ...initialDesign, preview, duration: 5000 })
+      setScenes([{ ...initialDesign, preview, duration: 5000 }])
     }
   }
 
@@ -115,3 +115,5 @@ export default function () {
     </Block>
   )
 }
+
+export default SceneContextMenu

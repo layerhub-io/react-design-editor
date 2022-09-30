@@ -6,21 +6,19 @@ import Toolbox from "./components/Toolbox"
 import EditorContainer from "./components/EditorContainer"
 import ContextMenu from "./components/ContextMenu"
 
-function GraphicEditor() {
+const GraphicEditor = () => {
   return (
-    <>
-      <EditorContainer>
-        <Navbar />
-        <div style={{ display: "flex", flex: 1 }}>
-          <Panels />
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative" }}>
-            <Toolbox />
-            <Canvas />
-            <Footer />
-          </div>
+    <EditorContainer>
+      <Navbar />
+      <div style={{ display: "flex", flex: 1 }}>
+        <Panels />
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative" }}>
+          <Toolbox />
+          <Canvas />
+          <Footer />
         </div>
-      </EditorContainer>
-    </>
+      </div>
+    </EditorContainer>
   )
 }
 

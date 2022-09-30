@@ -5,12 +5,12 @@ import Pause from "~/components/Icons/Pause"
 import PlaySolid from "~/components/Icons/PlaySolid"
 import useDesignEditorContext from "~/hooks/useDesignEditorContext"
 
-export default function () {
+const TimelineControl = () => {
   const { pause, status } = useTimer()
   const { setDisplayPlayback } = useDesignEditorContext()
 
   return (
-    <Block id={"EditorPlayControl"} $style={{ padding: "0 1rem" }}>
+    <Block id="EditorPlayControl" $style={{ padding: "0 1rem" }}>
       <Block
         onClick={
           status === "STOPPED" || status === "PAUSED"
@@ -38,3 +38,5 @@ export default function () {
     </Block>
   )
 }
+
+export default TimelineControl

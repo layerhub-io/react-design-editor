@@ -12,7 +12,7 @@ interface Options {
   strokeWidth: number
 }
 
-function Outline() {
+const Outline = () => {
   const editor = useEditor()
   const activeObject = useActiveObject()
 
@@ -44,7 +44,7 @@ function Outline() {
       }
     } else {
       if (editor && options.enabled) {
-        editor.objects.update({ [type]: value })
+      editor.objects.update({ [type]: value })
       }
     }
   }
@@ -64,10 +64,7 @@ function Outline() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Checkbox
-              checked={options.enabled}
-              onChange={(e) => handleChange("enabled", (e.target as any).checked)}
-            ></Checkbox>
+            <Checkbox checked={options.enabled} onChange={(e) => handleChange("enabled", (e.target as any).checked)} />
             Outline
           </div>
           <StatefulPopover
@@ -94,7 +91,7 @@ function Outline() {
                 />
               </div>
             }
-            accessibilityType={"tooltip"}
+            accessibilityType="tooltip"
           >
             <div>
               <div
@@ -108,12 +105,12 @@ function Outline() {
                   cursor: "pointer",
                   backgroundColor: options.stroke,
                 }}
-              ></div>
+              />
             </div>
           </StatefulPopover>
         </div>
       </div>
-      <div style={{ height: "10px" }}></div>
+      <div style={{ height: "10px" }} />
 
       <div style={{ padding: "0 8px" }}>
         <div>

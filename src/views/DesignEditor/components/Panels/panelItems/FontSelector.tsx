@@ -14,7 +14,7 @@ import { Block } from "baseui/block"
 import AngleDoubleLeft from "~/components/Icons/AngleDoubleLeft"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
-export default function () {
+const FontSelector = () => {
   const [query, setQuery] = React.useState("")
   const { setActiveSubMenu } = useAppContext()
   const setIsSidebarOpen = useSetIsSidebarOpen()
@@ -116,3 +116,5 @@ export default function () {
     </Block>
   )
 }
+
+export default FontSelector

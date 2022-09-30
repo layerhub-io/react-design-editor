@@ -7,7 +7,7 @@ import { IScene } from "@layerhub-io/types"
 import Loading from "~/components/Loading"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 
-export default function () {
+const Presentation = () => {
   const [slides, setSlides] = React.useState<{ id: string; preview: string }[]>([])
   const scenes = useDesignEditorScenes()
   const editor = useEditor()
@@ -58,7 +58,7 @@ export default function () {
         ) : (
           <Carousel showIndicators={false} showThumbs={false} useKeyboardArrows={true} showStatus={false}>
             {slides.map((page, index) => (
-              <img width={"auto"} height={"100%"} key={index} src={page.preview} />
+              <img width="auto" height="100%" key={index} src={page.preview} />
             ))}
           </Carousel>
         )}
@@ -66,3 +66,5 @@ export default function () {
     </Block>
   )
 }
+
+export default Presentation

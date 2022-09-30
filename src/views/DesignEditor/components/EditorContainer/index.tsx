@@ -1,7 +1,7 @@
 import React from "react"
 import { Block } from "baseui/block"
 
-export default function ({ children }: { children: React.ReactNode }) {
+const EditorContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <Block
       $style={{
@@ -17,3 +17,5 @@ export default function ({ children }: { children: React.ReactNode }) {
     </Block>
   )
 }
+
+export default EditorContainer

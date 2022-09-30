@@ -8,7 +8,7 @@ const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
   background: $theme.colors.white,
 }))
 
-export default function () {
+const Graphic = () => {
   return (
     <Container>
       <Scenes />
@@ -16,3 +16,5 @@ export default function () {
     </Container>
   )
 }
+
+export default Graphic

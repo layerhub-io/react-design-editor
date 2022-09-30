@@ -5,7 +5,7 @@ import Flip from "./Shared/Flip"
 import useAppContext from "~/hooks/useAppContext"
 import { useActiveObject, useEditor } from "@layerhub-io/react"
 
-export default function () {
+const Path = () => {
   const [state, setState] = React.useState({ fill: "#000000" })
   const { setActiveSubMenu } = useAppContext()
   const editor = useEditor()
@@ -62,7 +62,7 @@ export default function () {
               backgroundColor: state.fill,
               border: "1px solid #dedede",
             }}
-          ></Block>
+          />
         </Block>
         <Flip />
       </Block>
@@ -70,3 +70,5 @@ export default function () {
     </Block>
   )
 }
+
+export default Path

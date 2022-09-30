@@ -1,7 +1,7 @@
 import PanelItem from "./PanelItem"
 import PanelsList from "./PanelsList"
 
-function Panels() {
+const Panels = () => {
   return (
     <>
       <PanelsList />

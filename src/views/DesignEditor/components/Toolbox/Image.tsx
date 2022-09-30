@@ -2,7 +2,7 @@ import { Block } from "baseui/block"
 import Common from "./Common"
 import Flip from "./Shared/Flip"
 
-export default function () {
+const Image = () => {
   return (
     <Block
       $style={{
@@ -20,3 +20,5 @@ export default function () {
     </Block>
   )
 }
+
+export default Image

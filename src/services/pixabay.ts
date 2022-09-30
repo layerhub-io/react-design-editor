@@ -12,8 +12,8 @@ export interface PixabayImage {
   previewURL: string
 }
 
-export function getPixabayImages(query: string): Promise<PixabayImage[]> {
-  let encodedWord = query.replace(/\s+/g, "+").toLowerCase()
+export const getPixabayImages = (query: string): Promise<PixabayImage[]> => {
+  const encodedWord = query.replace(/\s+/g, "+").toLowerCase()
   return new Promise((resolve, reject) => {
     pixabayClient
       .get(`?key=${PIXABAY_KEY}&q=${encodedWord}&image_type=photo`)
@@ -24,8 +24,8 @@ export function getPixabayImages(query: string): Promise<PixabayImage[]> {
   })
 }
 
-export function getPixabayVideos(query: string): Promise<PixabayImage[]> {
-  let encodedWord = query.replace(/\s+/g, "+").toLowerCase()
+export const getPixabayVideos = (query: string): Promise<PixabayImage[]> => {
+  const encodedWord = query.replace(/\s+/g, "+").toLowerCase()
   return new Promise((resolve, reject) => {
     pixabayClient
       .get(`/videos?key=${PIXABAY_KEY}&q=${encodedWord}&per_page=20`)

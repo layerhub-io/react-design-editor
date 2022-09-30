@@ -7,7 +7,7 @@ import { Block } from "baseui/block"
 interface State {
   panel: string
 }
-function PanelsList() {
+const PanelsList = () => {
   const [state, setState] = React.useState<State>({ panel: "Text" })
   const isSidebarOpen = useIsSidebarOpen()
   const { activePanel, activeSubMenu } = useAppContext()

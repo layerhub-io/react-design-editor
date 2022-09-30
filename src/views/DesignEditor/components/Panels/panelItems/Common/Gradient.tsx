@@ -12,7 +12,7 @@ interface Options {
   enabled: boolean
 }
 
-function Gradient() {
+const Gradient = () => {
   const editor = useEditor()
   const activeObject = useActiveObject()
   const [options, setOptions] = React.useState<Options>({
@@ -34,9 +34,9 @@ function Gradient() {
       }
     } else {
       if (options.enabled) {
-        editor.objects.setGradient({ ...options, [key]: value })
-      }
+      editor.objects.setGradient({ ...options, [key]: value })
     }
+  }
   }
   const initialOptions = {
     angle: 0,
@@ -55,7 +55,7 @@ function Gradient() {
         enabled: true,
       }
     } else {
-      return initialOptions
+    return initialOptions
     }
   }
 
@@ -87,10 +87,7 @@ function Gradient() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Checkbox
-              checked={options.enabled}
-              onChange={(e) => handleChange("enabled", (e.target as any).checked)}
-            ></Checkbox>
+            <Checkbox checked={options.enabled} onChange={(e) => handleChange("enabled", (e.target as any).checked)} />
             Gradient
           </div>
           <div>
@@ -105,11 +102,11 @@ function Gradient() {
                 cursor: "pointer",
                 background: `linear-gradient(${options.angle + 90}deg, ${options.colors[0]}, ${options.colors[1]})`,
               }}
-            ></div>
+            />
           </div>
         </div>
       </div>
-      <div style={{ height: "10px" }}></div>
+      <div style={{ height: "10px" }} />
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 8px" }}>
         <div style={{ fontSize: "14px" }}>Colors</div>
         <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -137,7 +134,7 @@ function Gradient() {
                 />
               </div>
             }
-            accessibilityType={"tooltip"}
+            accessibilityType="tooltip"
           >
             <div>
               <div
@@ -151,7 +148,7 @@ function Gradient() {
                   cursor: "pointer",
                   backgroundColor: options.colors[0],
                 }}
-              ></div>
+              />
             </div>
           </StatefulPopover>
           <StatefulPopover
@@ -178,7 +175,7 @@ function Gradient() {
                 />
               </div>
             }
-            accessibilityType={"tooltip"}
+            accessibilityType="tooltip"
           >
             <div>
               <div
@@ -192,12 +189,12 @@ function Gradient() {
                   cursor: "pointer",
                   backgroundColor: options.colors[1],
                 }}
-              ></div>
+              />
             </div>
           </StatefulPopover>
         </div>
       </div>
-      <div style={{ height: "10px" }}></div>
+      <div style={{ height: "10px" }} />
 
       <div style={{ padding: "0 8px" }}>
         <div>

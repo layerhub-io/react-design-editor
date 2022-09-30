@@ -4,7 +4,7 @@ import Common from "./Common"
 import useAppContext from "~/hooks/useAppContext"
 import { useActiveObject, useEditor } from "@layerhub-io/react"
 
-export default function () {
+const Canvas = () => {
   const [state, setState] = React.useState({ fill: "#000000" })
   const { setActiveSubMenu } = useAppContext()
   const editor = useEditor()
@@ -59,9 +59,11 @@ export default function () {
               backgroundColor: state.fill,
               border: "1px solid #dedede",
             }}
-          ></Block>
+          />
         </Block>
       </Block>
     </Block>
   )
 }
+
+export default Canvas

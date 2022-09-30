@@ -14,7 +14,7 @@ interface Options {
   color: string
 }
 
-function Shadow() {
+const Shadow = () => {
   const editor = useEditor()
   const [options, setOptions] = React.useState<Options>({
     enabled: false,
@@ -68,7 +68,7 @@ function Shadow() {
             checked={options.enabled}
             // @ts-ignore
             onChange={(e) => handleChange("enabled", e.target.checked)}
-          ></Checkbox>
+          />
           Shadow
         </div>
         <StatefulPopover
@@ -95,7 +95,7 @@ function Shadow() {
               />
             </div>
           }
-          accessibilityType={"tooltip"}
+          accessibilityType="tooltip"
         >
           <div>
             <div
@@ -109,12 +109,12 @@ function Shadow() {
                 cursor: "pointer",
                 backgroundColor: options.color,
               }}
-            ></div>
+            />
           </div>
         </StatefulPopover>
       </div>
 
-      <div style={{ height: "10px" }}></div>
+      <div style={{ height: "10px" }} />
 
       <div style={{ padding: "0 8px" }}>
         <div>
@@ -145,7 +145,7 @@ function Shadow() {
       </div>
 
       <div>
-        <div style={{ height: "10px" }}></div>
+        <div style={{ height: "10px" }} />
         <div style={{ padding: "0 8px" }}>
           <div style={{ fontSize: "14px" }}>Offset Y</div>
           <Slider

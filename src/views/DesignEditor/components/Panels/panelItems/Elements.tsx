@@ -8,7 +8,7 @@ import Scrollable from "~/components/Scrollable"
 import { graphics } from "~/constants/mock-data"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
-export default function () {
+const Elements = () => {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
 
@@ -65,7 +65,7 @@ export default function () {
   )
 }
 
-function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) {
+const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
   const [css] = useStyletron()
   return (
     <div
@@ -95,3 +95,5 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
     </div>
   )
 }
+
+export default Elements

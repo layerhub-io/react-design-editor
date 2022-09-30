@@ -5,7 +5,7 @@ import { DesignEditorContext } from "~/contexts/DesignEditor"
 
 const SCALE_FACTOR = 1
 
-export default function () {
+const TimeMarker = () => {
   const { time, setTime, pause } = useTimer()
 
   const [position, setPosition] = React.useState({
@@ -61,41 +61,41 @@ export default function () {
   }
 
   return (
-    <>
+    <Block
+      onMouseDown={onStart}
+      $style={{
+        position: "absolute",
+        zIndex: 3,
+        left: `${position.x}px`,
+        top: "-2px",
+        width: "2px",
+        bottom: "0px",
+      }}
+    >
       <Block
-        onMouseDown={onStart}
+        id="EditorPlayHead"
         $style={{
-          position: "absolute",
-          zIndex: 3,
-          left: `${position.x}px`,
-          top: "-2px",
-          width: "2px",
-          bottom: "0px",
+          width: 0,
+          height: 0,
+          borderLeft: "9px solid transparent",
+          borderRight: "9px solid transparent",
+          borderTop: "11px solid #333333",
+          borderRadius: "5px",
+          transform: "translate(-8px, -1px)",
         }}
-      >
-        <Block
-          id={"EditorPlayHead"}
-          $style={{
-            width: 0,
-            height: 0,
-            borderLeft: "9px solid transparent",
-            borderRight: "9px solid transparent",
-            borderTop: "11px solid #333333",
-            borderRadius: "5px",
-            transform: "translate(-8px, -1px)",
-          }}
-        />
+      />
 
-        <Block
-          id="markerLine"
-          $style={{
-            height: "84px",
-            width: "2px",
-            backgroundColor: "#333333",
-            transform: "translate(0, -2px)",
-          }}
-        />
-      </Block>
-    </>
+      <Block
+        id="markerLine"
+        $style={{
+          height: "84px",
+          width: "2px",
+          backgroundColor: "#333333",
+          transform: "translate(0, -2px)",
+        }}
+      />
+    </Block>
   )
 }
+
+export default TimeMarker

@@ -7,7 +7,7 @@ import useDesignEditorContext from "~/hooks/useDesignEditorContext"
 import useDesignEditorScenes from "~/hooks/useDesignEditorScenes"
 import { useTimer } from "@layerhub-io/use-timer"
 
-function VerticalLine({ size }: { size: number }) {
+const VerticalLine = ({ size }: { size: number }) => {
   return (
     <svg width="3" height="24" viewBox="0 0 3 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -38,7 +38,7 @@ const RightHandle = ({ isHover, setControlHover }: { isHover: boolean; setContro
   </div>
 )
 
-export default function ({ item, makeResizeTimelineItem, width, preview, frame, duration, isCurrentScene }: any) {
+const TimelineItem = ({ item, makeResizeTimelineItem, width, preview, frame, duration, isCurrentScene }: any) => {
   const timeLineItemRef = React.useRef<HTMLDivElement>(null)
   const { setContextMenuTimelineRequest } = useDesignEditorContext()
   const [markerRefPosition, setMarkerRefPosition] = React.useState({ y: 0 })
@@ -147,7 +147,7 @@ export default function ({ item, makeResizeTimelineItem, width, preview, frame, 
                 height: "70px",
                 border: isCurrentScene ? "2px solid #7158e2" : "2px solid rgba(0,0,0,.15)",
               }}
-            ></Block>
+            />
             {options.isItemHover &&
               refBoundingRect &&
               markerRefPosition.y + 22 < refBoundingRect.width &&
@@ -166,7 +166,7 @@ export default function ({ item, makeResizeTimelineItem, width, preview, frame, 
                     transform: "translate(0, -2px)",
                     cursor: "pointer",
                   }}
-                ></Block>
+                />
               )}
             <Block
               $style={{
@@ -192,3 +192,5 @@ export default function ({ item, makeResizeTimelineItem, width, preview, frame, 
     </Resizable>
   )
 }
+
+export default TimelineItem

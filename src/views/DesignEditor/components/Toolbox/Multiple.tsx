@@ -1,7 +1,7 @@
 import { Block } from "baseui/block"
 import Common from "./Common"
 
-export default function () {
+const Multiple = () => {
   return (
     <Block
       $style={{
@@ -17,3 +17,5 @@ export default function () {
     </Block>
   )
 }
+
+export default Multiple

@@ -9,7 +9,7 @@ import Paste from "~/components/Icons/Paste"
 import SendToBack from "~/components/Icons/SendToBack"
 import Unlocked from "~/components/Icons/Unlocked"
 
-function ContextMenu() {
+const ContextMenu = () => {
   const contextMenuRequest = useContextMenuRequest()
   const editor = useEditor()
   const handleAsComponentHandler = async () => {
@@ -26,55 +26,53 @@ function ContextMenu() {
 
   if (contextMenuRequest.target.type === "Background") {
     return (
-      <>
-        <div // @ts-ignore
-          onContextMenu={(e: Event) => e.preventDefault()}
-          style={{
-            position: "absolute",
-            top: `${contextMenuRequest.top}px`,
-            left: `${contextMenuRequest.left}px`,
-            zIndex: 129,
-            width: "240px",
-            backgroundColor: "#ffffff",
-            borderRadius: "10px",
-            boxShadow: "0.5px 2px 7px rgba(0, 0, 0, 0.1)",
-            padding: "0.5rem 0",
+      <div // @ts-ignore
+        onContextMenu={(e: Event) => e.preventDefault()}
+        style={{
+          position: "absolute",
+          top: `${contextMenuRequest.top}px`,
+          left: `${contextMenuRequest.left}px`,
+          zIndex: 129,
+          width: "240px",
+          backgroundColor: "#ffffff",
+          borderRadius: "10px",
+          boxShadow: "0.5px 2px 7px rgba(0, 0, 0, 0.1)",
+          padding: "0.5rem 0",
+        }}
+      >
+        <ContextMenuItem
+            disabled={true}
+          onClick={() => {
+            editor.objects.copy()
+            editor.cancelContextMenu()
           }}
+          icon="Duplicate"
+          label="copy"
         >
-          <ContextMenuItem
+          <Duplicate size={24} />
+        </ContextMenuItem>
+        <ContextMenuItem
+          onClick={() => {
+            editor.objects.paste()
+            editor.cancelContextMenu()
+          }}
+          icon="Paste"
+          label="paste"
+        >
+          <Paste size={24} />
+        </ContextMenuItem>
+        <ContextMenuItem
             disabled={true}
-            onClick={() => {
-              editor.objects.copy()
-              editor.cancelContextMenu()
-            }}
-            icon="Duplicate"
-            label="copy"
-          >
-            <Duplicate size={24} />
-          </ContextMenuItem>
-          <ContextMenuItem
-            onClick={() => {
-              editor.objects.paste()
-              editor.cancelContextMenu()
-            }}
-            icon="Paste"
-            label="paste"
-          >
-            <Paste size={24} />
-          </ContextMenuItem>
-          <ContextMenuItem
-            disabled={true}
-            onClick={() => {
-              editor.objects.remove()
-              editor.cancelContextMenu()
-            }}
-            icon="Delete"
-            label="delete"
-          >
-            <Delete size={24} />
-          </ContextMenuItem>
-        </div>
-      </>
+          onClick={() => {
+            editor.objects.remove()
+            editor.cancelContextMenu()
+          }}
+          icon="Delete"
+          label="delete"
+        >
+          <Delete size={24} />
+        </ContextMenuItem>
+      </div>
     )
   }
   return (
@@ -198,7 +196,7 @@ function ContextMenu() {
   )
 }
 
-function ContextMenuItem({
+const ContextMenuItem = ({
   label,
   onClick,
   children,
@@ -209,7 +207,7 @@ function ContextMenuItem({
   onClick: () => void
   disabled?: boolean
   children: React.ReactNode
-}) {
+}) => {
   const [css] = useStyletron()
   return (
     <div

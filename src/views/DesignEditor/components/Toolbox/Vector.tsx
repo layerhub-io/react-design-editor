@@ -7,7 +7,7 @@ import { groupBy } from "lodash"
 import { PLACEMENT, StatefulPopover } from "baseui/popover"
 import Flip from "./Shared/Flip"
 
-export default function () {
+const Vector = () => {
   const [state, setState] = React.useState<any>({ colors: [], colorMap: {} })
   const vectorPaths = React.useRef<any>({})
   const activeObject = useActiveObject() as any
@@ -70,7 +70,7 @@ export default function () {
                       />
                     </div>
                   }
-                  accessibilityType={"tooltip"}
+                  accessibilityType="tooltip"
                 >
                   <div>
                     <div
@@ -84,7 +84,7 @@ export default function () {
                         backgroundColor: state.colorMap[c],
                         border: "1px solid #dedede",
                       }}
-                    ></div>
+                    />
                   </div>
                 </StatefulPopover>
               )
@@ -97,3 +97,5 @@ export default function () {
     </Block>
   )
 }
+
+export default Vector

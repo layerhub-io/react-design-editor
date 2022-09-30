@@ -15,7 +15,7 @@ import { Block } from "baseui/block"
 import useContextMenuTimelineRequest from "~/hooks/useContextMenuTimelineRequest"
 import SceneContextMenu from "./SceneContextMenu"
 
-export default function () {
+const Scenes = () => {
   const scenes = useDesignEditorPages()
   const { setScenes, setCurrentScene, currentScene, setCurrentDesign, currentDesign } =
     React.useContext(DesignEditorContext)
@@ -141,14 +141,14 @@ export default function () {
     [editor, scenes, currentScene]
   )
 
-  function handleDragStart(event: any) {
+  const handleDragStart = (event: any) => {
     const draggedScene = scenes.find((s) => s.id === event.active.id)
     if (draggedScene) {
       setDraggedScene(draggedScene)
     }
   }
 
-  function handleDragEnd(event: any) {
+  const handleDragEnd = (event: any) => {
     const { active, over } = event
 
     if (active.id !== over.id) {
@@ -221,7 +221,7 @@ export default function () {
                   height: "80px",
                   opacity: 0.75,
                 }}
-              ></Block>
+              />
             ) : null}
           </DragOverlay>
         </div>
@@ -229,3 +229,5 @@ export default function () {
     </DndContext>
   )
 }
+
+export default Scenes

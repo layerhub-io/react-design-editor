@@ -22,11 +22,11 @@ const getAddOptions = (event: HandledEventsType): AddEventListenerOptions | unde
 
 const currentDocument = typeof document !== "undefined" ? document : undefined
 
-export default function useOnClickOutside(
+const useOnClickOutside = (
   ref: React.RefObject<HTMLElement>,
   handler: Handler | null,
   { document = currentDocument } = {}
-) {
+) => {
   if (typeof document === "undefined") {
     return
   }
@@ -57,3 +57,5 @@ export default function useOnClickOutside(
     }
   }, [!handler])
 }
+
+export default useOnClickOutside

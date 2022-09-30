@@ -8,7 +8,7 @@ import { useActiveObject, useEditor } from "@layerhub-io/react"
 import { Button, SIZE, KIND } from "baseui/button"
 import OpacityIcon from "~/components/Icons/Opacity."
 
-export default function () {
+const Opacity = () => {
   const editor = useEditor()
   const [state, setState] = React.useState({ opacity: 1 })
   const activeObject = useActiveObject() as Required<ILayer>
@@ -31,10 +31,10 @@ export default function () {
     <StatefulPopover
       placement={PLACEMENT.bottomLeft}
       content={() => (
-        <Block width={"200px"} backgroundColor={"#ffffff"} padding={"20px"}>
+        <Block width="200px" backgroundColor="#ffffff" padding="20px">
           <Block $style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <Block $style={{ fontSize: "14px" }}>Opacity</Block>
-            <Block width={"52px"}>
+            <Block width="52px">
               <Input
                 overrides={{
                   Input: {
@@ -101,3 +101,5 @@ export default function () {
     </StatefulPopover>
   )
 }
+
+export default Opacity

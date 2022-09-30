@@ -12,7 +12,7 @@ import Delete from "~/components/Icons/Delete"
 import { Button, KIND, SIZE } from "baseui/button"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
-export default function () {
+const Layers = () => {
   const editor = useEditor()
   const objects = useObjects() as ILayer[]
   const [layerObjects, setLayerObjects] = React.useState<any[]>([])
@@ -58,7 +58,7 @@ export default function () {
         </Block>
       </Block>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Block padding="0 1.5rem">
           {layerObjects.map((object) => (
             <Block
               $style={{
@@ -166,3 +166,5 @@ export default function () {
     </Block>
   )
 }
+
+export default Layers

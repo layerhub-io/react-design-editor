@@ -7,7 +7,7 @@ import Video from "~/components/Icons/Video"
 import Images from "~/components/Icons/Images"
 import Presentation from "~/components/Icons/Presentation"
 
-export default function () {
+const SelectEditor = () => {
   const [selectedEditor, setSelectedEditor] = React.useState<DesignType>("GRAPHIC")
   const { setEditorType } = useDesignEditorContext()
 
@@ -93,3 +93,5 @@ export default function () {
     </Block>
   )
 }
+
+export default SelectEditor

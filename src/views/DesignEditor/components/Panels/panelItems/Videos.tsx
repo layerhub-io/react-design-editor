@@ -55,7 +55,7 @@ const captureDuration = (video: HTMLVideoElement): Promise<number> => {
   })
 }
 
-export default function () {
+const Videos = () => {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
   const [videos, setVideos] = React.useState<any[]>([])
@@ -113,10 +113,10 @@ export default function () {
         </Block>
       </Block>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Block padding="0 1.5rem">
           <div style={{ display: "grid", gap: "8px", gridTemplateColumns: "1fr 1fr" }}>
             {videos.map((video, index) => {
-              return <img width={"120px"} key={index} src={video.preview} onClick={() => addObject(video)} />
+              return <img width="120px" key={index} src={video.preview} onClick={() => addObject(video)} />
             })}
           </div>
         </Block>
@@ -125,7 +125,7 @@ export default function () {
   )
 }
 
-function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) {
+const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
   const [css] = useStyletron()
   return (
     <div
@@ -173,7 +173,7 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
             opacity: 1,
           },
         })}
-      ></div>
+      />
       <img
         src={preview}
         className={css({
@@ -187,3 +187,5 @@ function ImageItem({ preview, onClick }: { preview: any; onClick?: (option: any)
     </div>
   )
 }
+
+export default Videos

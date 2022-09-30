@@ -15,7 +15,7 @@ import TimelineContextMenu from "./TimelineContextMenu"
 import useContextMenuTimelineRequest from "~/hooks/useContextMenuTimelineRequest"
 import { findSceneIndexByTime } from "~/views/DesignEditor/utils/scenes"
 
-export default function () {
+const Timeline = () => {
   const { time, setTime, status } = useTimer()
   const { setScenes, setCurrentScene, currentScene, scenes, setCurrentPreview, setCurrentDesign, currentDesign } =
     React.useContext(DesignEditorContext)
@@ -173,3 +173,5 @@ export default function () {
     </Block>
   )
 }
+
+export default Timeline
