@@ -5,7 +5,7 @@ specifiers:
   '@dnd-kit/modifiers': ^6.0.0
   '@dnd-kit/sortable': ^7.0.1
   '@dnd-kit/utilities': ^3.2.0
-  '@layerhub-io/react': ^0.3.0
+  '@layerhub-io/react': ^0.3.2
   '@layerhub-io/react-custom-scrollbar': ^0.0.1
   '@layerhub-io/types': ^0.3.0
   '@layerhub-io/use-timer': ^0.1.1
@@ -47,7 +47,7 @@ dependencies:
   '@dnd-kit/modifiers': 6.0.0_vvd3dzag27tc7rclyb2whqqnpe
   '@dnd-kit/sortable': 7.0.1_vvd3dzag27tc7rclyb2whqqnpe
   '@dnd-kit/utilities': 3.2.0_react@18.2.0
-  '@layerhub-io/react': 0.3.0
+  '@layerhub-io/react': 0.3.2
   '@layerhub-io/react-custom-scrollbar': 0.0.1_react@18.2.0
   '@layerhub-io/use-timer': 0.1.1_react@18.2.0
   '@reduxjs/toolkit': 1.8.2_kkwg4cbsojnjnupd3btipussee
@@ -469,8 +469,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@layerhub-io/core/0.3.0:
-    resolution: {integrity: sha512-UH6mBFjSD0SjyaroL8WG9Y+cGXaIVh0PceYzW2NiPkRbBF/vLlSpMx1RIL1MipdI6GYUax0uIWfzud8tDrRXmA==}
+  /@layerhub-io/core/0.3.2:
+    resolution: {integrity: sha512-YWGb8587sxR4vaa5C4JV+8z3C9EsVhh2mMYiDttq883WOgAvL76WhKKXnVcaF+myiq4S1+M8/ddthPFGh2r3iw==}
     dependencies:
       '@layerhub-io/objects': 0.2.0_fabric@5.2.1
       '@layerhub-io/types': 0.3.0
@@ -505,10 +505,10 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@layerhub-io/react/0.3.0:
-    resolution: {integrity: sha512-cxaJMQmd6vCk/Q4YVHo94jin0JN9PGoU48CuUQZYEU7kk/Lszv4t7JU7x5wOZc/XiA+Ga8NPnxX7JDB7TR3fVw==}
+  /@layerhub-io/react/0.3.2:
+    resolution: {integrity: sha512-x4pw6ToSrQxchiLOv+3It+kW0nXb9mbfMVS5zMf5YgMPphcpMK5BG4+muugyJRIKRXwO7rJRwCa7GKx3FFPsqQ==}
     dependencies:
-      '@layerhub-io/core': 0.3.0
+      '@layerhub-io/core': 0.3.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       resize-observer-polyfill: 1.5.1

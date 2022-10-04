@@ -7,20 +7,37 @@ import DropZone from "~/components/Dropzone"
 import { useEditor } from "@layerhub-io/react"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 import { nanoid } from "nanoid"
+import { captureFrame, loadVideoResource } from "~/utils/video"
+import { ILayer } from "@layerhub-io/types"
+import { toBase64 } from "~/utils/data"
 
-const Uploads = () => {
+export default function () {
   const inputFileRef = React.useRef<HTMLInputElement>(null)
   const [uploads, setUploads] = React.useState<any[]>([])
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
 
-  const handleDropFiles = (files: FileList) => {
+  const handleDropFiles = async (files: FileList) => {
     const file = files[0]
-    const url = URL.createObjectURL(file)
+
+    const isVideo = file.type.includes("video")
+    const base64 = (await toBase64(file)) as string
+    let preview = base64
+    if (isVideo) {
+      const video = await loadVideoResource(base64)
+      const frame = await captureFrame(video)
+      preview = frame
+    }
+
+    const type = isVideo ? "StaticVideo" : "StaticImage"
+
     const upload = {
       id: nanoid(),
-      url,
+      src: base64,
+      preview: preview,
+      type: type,
     }
+
     setUploads([...uploads, upload])
   }
 
@@ -32,12 +49,8 @@ const Uploads = () => {
     handleDropFiles(e.target.files!)
   }
 
-  const addImageToCanvas = (url: string) => {
-    const options = {
-      type: "StaticImage",
-      src: url,
-    }
-    editor.objects.add(options)
+  const addImageToCanvas = (props: Partial<ILayer>) => {
+    editor.objects.add(props)
   }
   return (
     <DropZone handleDropFiles={handleDropFiles}>
@@ -58,7 +71,7 @@ const Uploads = () => {
           </Block>
         </Block>
         <Scrollable>
-          <Block padding="0 1.5rem">
+          <Block padding={"0 1.5rem"}>
             <Button
               onClick={handleInputFileRefClick}
               size={SIZE.compact}
@@ -90,10 +103,10 @@ const Uploads = () => {
                     alignItems: "center",
                     cursor: "pointer",
                   }}
-                  onClick={() => addImageToCanvas(upload.url)}
+                  onClick={() => addImageToCanvas(upload)}
                 >
                   <div>
-                    <img width="100%" src={upload.url} alt="preview" />
+                    <img width="100%" src={upload.preview ? upload.preview : upload.url} alt="preview" />
                   </div>
                 </div>
               ))}
@@ -104,5 +117,3 @@ const Uploads = () => {
     </DropZone>
   )
 }
-
-export default Uploads

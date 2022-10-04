@@ -19,9 +19,9 @@ export const loadVideoResource = (videoSrc: string): Promise<HTMLVideoElement> =
   })
 }
 
-export const captureFrame = (video: HTMLVideoElement) => {
+export const captureFrame = (video: HTMLVideoElement): Promise<string> => {
   return new Promise(function (resolve) {
-    var canvas = document.createElement("canvas") as HTMLCanvasElement
+    const canvas = document.createElement("canvas") as HTMLCanvasElement
     canvas.width = video.videoWidth
     canvas.height = video.videoHeight
     canvas.getContext("2d")!.drawImage(video, 0, 0, canvas.width, canvas.height)
