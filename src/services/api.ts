@@ -10,12 +10,6 @@ type Template = any
 class ApiService {
   base: AxiosInstance
   constructor() {
-    // this.base = axios.create({
-    //   baseURL: "https://imagewow-dev.up.railway.app",
-    //   headers: {
-    //     Authorization: "Bearer QYT8s1NavSTpTAxURji98Fpg",
-    //   },
-    // })
     this.base = axios.create({
       baseURL: "/api",
       withCredentials: true,
