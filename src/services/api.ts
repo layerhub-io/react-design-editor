@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios"
+import { IDesign } from "~/interfaces/DesignEditor"
 import { Resource } from "~/interfaces/editor"
 
 type IElement = any
@@ -9,12 +10,15 @@ type Template = any
 class ApiService {
   base: AxiosInstance
   constructor() {
+    // this.base = axios.create({
+    //   baseURL: "https://imagewow-dev.up.railway.app",
+    //   headers: {
+    //     Authorization: "Bearer QYT8s1NavSTpTAxURji98Fpg",
+    //   },
+    // })
     this.base = axios.create({
-      // baseURL: "http://localhost:8080",
-      baseURL: "https://burly-note-production.up.railway.app",
-      headers: {
-        Authorization: "Bearer QYT8s1NavSTpTAxURji98Fpg",
-      },
+      baseURL: "/api",
+      withCredentials: true,
     })
   }
 
@@ -142,16 +146,31 @@ class ApiService {
     })
   }
 
-  getTemplates(): Promise<any[]> {
+
+  getPublicDesigns(): Promise<IDesign[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data } = await this.base.get("/templates")
-        resolve(data)
+        const { data } = await this.base.get("/public-designs")
+        resolve(data.designs)
+        console.log(data);
+        
       } catch (err) {
         reject(err)
       }
     })
   }
+
+  getPublicDesignById(id: string): Promise<IDesign> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await this.base.get(`/public-designs/${id}`)
+        resolve(data.design)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
 
   getTemplateById(id: string): Promise<any> {
     return new Promise(async (resolve, reject) => {
